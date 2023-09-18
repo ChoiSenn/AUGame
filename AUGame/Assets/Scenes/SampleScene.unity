@@ -639,7 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5000
   jumpForce: 700
-  animator: {fileID: 0}
+  animator: {fileID: 1299340263}
 --- !u!95 &1299340263
 Animator:
   serializedVersion: 5

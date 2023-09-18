@@ -52,7 +52,18 @@ public class PlayerMoving : MonoBehaviour
             if (rb.velocity.y == 0) // Y의 값이 0이면 점프
             {
                 rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
+
+                animator.SetBool("Jumping", true);  // 점프 모션
             }
+        }
+
+        if(rb.velocity.y == 0)
+        {
+            animator.SetBool("Jumping", false);  // 점프 모션 해제
+        }
+        else
+        {
+            animator.SetBool("Jumping", true);  // 점프 모션
         }
     }
 }
