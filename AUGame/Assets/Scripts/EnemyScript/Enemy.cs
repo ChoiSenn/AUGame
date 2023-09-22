@@ -62,25 +62,46 @@ public class Enemy : MonoBehaviour
             {
                 //nowHp -= player.atkDmg;
                 nowHp -= 10;
-                Debug.Log("Slime Damaged : " + nowHp);
                 //player.attacked = false;
+
                 if (nowHp <= 0) // 적 사망
                 {
-                    Destroy(gameObject);
-                    Destroy(hpBar.gameObject);
+                    Die();
+                }
+                else
+                {
+                    Attacked();  // 공격 받는 모션
                 }
             }
         }
     }
 
+    public Transform target;
+
+    void Attacked()  // 공격당하면 움찔거리는 모션 추가
+    {
+        enemyAnimator.SetTrigger("Attacked");
+
+        float dir = target.position.x - transform.position.x;
+        if(dir < 0)  // 적과 플레이어 위치에 따라 뒤로 20만큼 넉백 줌
+        {
+            transform.Translate(new Vector2(20, 0) * 100 * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(new Vector2(-20, 0) * 100 * Time.deltaTime);
+        }
+    }
+
     void Die()
     {
-        enemyAnimator.SetTrigger("die");            // die 애니메이션 실행
+        enemyAnimator.SetTrigger("Die");            // die 애니메이션 실행
+        Debug.Log("Slime Dying!!");
         GetComponent<EnemyAI>().enabled = false;    // 추적 비활성화
         GetComponent<Collider2D>().enabled = false; // 충돌체 비활성화
         Destroy(GetComponent<Rigidbody2D>());       // 중력 비활성화
-        Destroy(gameObject, 3);                     // 3초후 제거
-        Destroy(hpBar.gameObject, 3);               // 3초후 체력바 제거
+        Destroy(gameObject, 1);                     // 3초후 제거
+        Destroy(hpBar.gameObject, 1);               // 3초후 체력바 제거
     }
 
     void SetAttackSpeed(float speed)

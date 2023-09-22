@@ -6,13 +6,13 @@ public class PlayerMoving : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    [Header("AD ÀÌµ¿ ¼Óµµ")]
+    [Header("AD ì´ë™ ì†ë„")]
     [SerializeField][Range(0, 1000)] int speed = 150;
 
-    [Header("½ºÆäÀÌ½º Á¡ÇÁ °­µµ")]
+    [Header("ìŠ¤í˜ì´ìŠ¤ ì í”„ ê°•ë„")]
     [SerializeField][Range(0f, 100f)] float jumpForce = 3f;
 
-    public Animator animator;  // Animator ºÒ·¯¿È
+    public Animator animator;  // Animator ë¶ˆëŸ¬ì˜´
 
     public Transform pos;
     public Vector2 boxSize;
@@ -25,62 +25,63 @@ public class PlayerMoving : MonoBehaviour
 
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))  // °ø°İ ÁßÀÌ¶ó¸é ¸ØÃã
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))  // ê³µê²© ì¤‘ì´ë¼ë©´ ë©ˆì¶¤
         {
 
         }
-        else  // °ø°İ ÁßÀÌ ¾Æ´Ò ¶§ ÀÌµ¿ °¡´É
+        else  // ê³µê²© ì¤‘ì´ ì•„ë‹ ë•Œ ì´ë™ ê°€ëŠ¥
         {
-            // ÀÌµ¿
-            if (Input.GetKey(KeyCode.A)) // A¸¦ ´­·¶À» ¶§
+            // ì´ë™
+            if (Input.GetKey(KeyCode.A)) // Aë¥¼ ëˆŒë €ì„ ë•Œ
             {
-                animator.SetBool("Walking", true);  // °È°íÀÖÀ½
-                animator.SetBool("MoveLeft", true);  // ¿ŞÂÊ
+                animator.SetBool("Walking", true);  // ê±·ê³ ìˆìŒ
+                animator.SetBool("MoveLeft", true);  // ì™¼ìª½
 
                 transform.position = transform.position - transform.right * Time.deltaTime * speed;
                 //moveX = Input.GetAxis("Horizontal") * moveSpeed * Time.smoothDeltaTime;
                 //rb.velocity = new Vector2(moveX, rb.velocity.y);
             }
 
-            else if (Input.GetKey(KeyCode.D)) // D¸¦ ´­·¶À» ¶§
+            else if (Input.GetKey(KeyCode.D)) // Dë¥¼ ëˆŒë €ì„ ë•Œ
             {
-                animator.SetBool("Walking", true);  // °È°íÀÖÀ½
-                animator.SetBool("MoveLeft", false);  // ¿À¸¥ÂÊ
+                animator.SetBool("Walking", true);  // ê±·ê³ ìˆìŒ
+                animator.SetBool("MoveLeft", false);  // ì˜¤ë¥¸ìª½
 
                 transform.position = transform.position + transform.right * Time.deltaTime * speed;
-                //moveX = Input.GetAxis("Horizontal") * moveSpeed * Time.smoothDeltaTime; // ¼öÆòÀ¸·Î ½ºÇÇµå¿Í µ¨Å¸ Å¸ÀÔÀ» °öÇÑ °ªÀ» x¿¡
-                //rb.velocity = new Vector2(moveX, rb.velocity.y); // ÁÂ¿ì·Î ¿òÁ÷ÀÌ´Â °ªÀ» ÀúÀå
+                //moveX = Input.GetAxis("Horizontal") * moveSpeed * Time.smoothDeltaTime; // ìˆ˜í‰ìœ¼ë¡œ ìŠ¤í”¼ë“œì™€ ë¸íƒ€ íƒ€ì…ì„ ê³±í•œ ê°’ì„ xì—
+                //rb.velocity = new Vector2(moveX, rb.velocity.y); // ì¢Œìš°ë¡œ ì›€ì§ì´ëŠ” ê°’ì„ ì €ì¥
             }
 
-            else  // aµµ dµµ ´­¸®Áö ¾ÊÀº »óÅÂ¶ó¸é
+            else  // aë„ dë„ ëˆŒë¦¬ì§€ ì•Šì€ ìƒíƒœë¼ë©´
             {
-                animator.SetBool("Walking", false);  // ¸ØÃã
+                animator.SetBool("Walking", false);  // ë©ˆì¶¤
             }
 
-            if (Input.GetKeyDown(KeyCode.Space)) // ½ºÆäÀÌ½º¸¦ ´­·¶À» ¶§
+            if (Input.GetKeyDown(KeyCode.Space)) // ìŠ¤í˜ì´ìŠ¤ë¥¼ ëˆŒë €ì„ ë•Œ
             {
-                if (rb.velocity.y == 0) // YÀÇ °ªÀÌ 0ÀÌ¸é Á¡ÇÁ
+                if (rb.velocity.y == 0) // Yì˜ ê°’ì´ 0ì´ë©´ ì í”„
                 {
                     rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
 
-                    animator.SetBool("Jumping", true);  // Á¡ÇÁ ¸ğ¼Ç
+                    animator.SetBool("Jumping", true);  // ì í”„ ëª¨ì…˜
                 }
             }
 
-            if (rb.velocity.y == 0)  // °øÁß¿¡ ¶°ÀÖÀ¸¸é Á¡ÇÁ ¸ğ¼Ç
+            if (rb.velocity.y == 0)  // ê³µì¤‘ì— ë– ìˆìœ¼ë©´ ì í”„ ëª¨ì…˜
             {
-                animator.SetBool("Jumping", false);  // Á¡ÇÁ ¸ğ¼Ç ÇØÁ¦
+                animator.SetBool("Jumping", false);  // ì í”„ ëª¨ì…˜ í•´ì œ
             }
             else
             {
-                animator.SetBool("Jumping", true);  // Á¡ÇÁ ¸ğ¼Ç
+                animator.SetBool("Jumping", true);  // ì í”„ ëª¨ì…˜
             }
 
             if (Input.GetMouseButtonDown(0) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            { // ÁÂÅ¬¸¯ÀÌ ´­·È°í Attack ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ½ÇÇàµÇ°í ÀÖÁö ¾Ê´Ù¸é
-                animator.SetTrigger("Attack");  // Attack Æ®¸®°Å¸¦ ¼³Á¤ÇÏ¿© °ø°İ ¸ğ¼Ç
+            { // ì¢Œí´ë¦­ì´ ëˆŒë ¸ê³  Attack ì• ë‹ˆë©”ì´ì…˜ì´ ì‹¤í–‰ë˜ê³  ìˆì§€ ì•Šë‹¤ë©´
+                animator.SetTrigger("Attack");  // Attack íŠ¸ë¦¬ê±°ë¥¼ ì„¤ì •í•˜ì—¬ ê³µê²© ëª¨ì…˜
 
-                Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);  // Ãæµ¹ °Ë»ç
+                Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);  // ì¶©ëŒ ê²€ì‚¬
                 foreach (Collider2D collider in collider2Ds)
                 {
                     //Debug.Log(collider.tag);
@@ -100,9 +101,17 @@ public class PlayerMoving : MonoBehaviour
         attacked = false;
     }
 
-    private void OnDrawGizmos()  // ÇÇ°İ ¹üÀ§ ±×¸®±â 
+    private void OnDrawGizmos()  // í”¼ê²© ë²”ìœ„ ê·¸ë¦¬ê¸° 
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(pos.position, boxSize);
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)  // í•´ë‹¹ íƒœê·¸ì— ë‹¿ì•˜ì„ ë•Œ
+    {
+        if (col.CompareTag("Enemy"))  // ì ì—ê²Œ ë‹¿ìœ¼ë©´
+        {
+            transform.position = new Vector3(-315.7418f, -58.85741f, 599.7907f);  // ì²˜ìŒì— ìˆë˜ ìœ„ì¹˜ë¡œ (ê²Œì„ì˜¤ë²„ ê°œë…. ê²Œì„ì˜¤ë²„ ì¶”ê°€í•  ê²ƒ)
+        }
     }
 }

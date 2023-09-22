@@ -64,7 +64,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void AttackTarget()
+    void AttackTarget()  // 공격 부분인데 아직 특별한 공격 없어서 일단 접촉하면 데미지
     {
         //target.GetComponent<PlayerMoving>().nowHp -= enemy.atkDmg;
         //enemyAnimator.SetTrigger("attack"); // 공격 애니메이션 실행
