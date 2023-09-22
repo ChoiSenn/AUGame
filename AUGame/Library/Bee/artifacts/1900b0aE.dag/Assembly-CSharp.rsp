@@ -377,6 +377,8 @@
 "Assets/Scripts/EnemyScript/EnemyAI.cs"
 "Assets/Scripts/ETCScript/CameraFollow.cs"
 "Assets/Scripts/PlayerScript/AttackAreaPosition.cs"
+"Assets/Scripts/PlayerScript/FireMagic.cs"
+"Assets/Scripts/PlayerScript/MagicAttack.cs"
 "Assets/Scripts/PlayerScript/PlayerMoving.cs"
 -langversion:9.0
 

@@ -19,6 +19,8 @@ public class PlayerMoving : MonoBehaviour
 
     public Transform posPlayer;
 
+    public string magic = null;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,25 +36,31 @@ public class PlayerMoving : MonoBehaviour
         }
         else  // 공격 중이 아닐 때 이동 가능
         {
+            if (Input.GetKey(KeyCode.E)) // 마법 테스트용 코드!!!!!!!!!!!!!!!!!!!!!!!!!!
+            {
+                magic = "fire";
+            } else if (Input.GetKey(KeyCode.Q))
+            {
+                magic = null;
+            }
+
             // 이동
             if (Input.GetKey(KeyCode.A)) // A를 눌렀을 때
             {
                 animator.SetBool("Walking", true);  // 걷고있음
                 animator.SetBool("MoveLeft", true);  // 왼쪽
+                transform.eulerAngles = new Vector3(0, 180, 0);
 
-                transform.position = transform.position - transform.right * Time.deltaTime * speed;
-                //moveX = Input.GetAxis("Horizontal") * moveSpeed * Time.smoothDeltaTime;
-                //rb.velocity = new Vector2(moveX, rb.velocity.y);
+                transform.position = transform.position + transform.right * Time.deltaTime * speed;
             }
 
             else if (Input.GetKey(KeyCode.D)) // D를 눌렀을 때
             {
                 animator.SetBool("Walking", true);  // 걷고있음
                 animator.SetBool("MoveLeft", false);  // 오른쪽
+                transform.eulerAngles = new Vector3(0, 0, 0);
 
                 transform.position = transform.position + transform.right * Time.deltaTime * speed;
-                //moveX = Input.GetAxis("Horizontal") * moveSpeed * Time.smoothDeltaTime; // 수평으로 스피드와 델타 타입을 곱한 값을 x에
-                //rb.velocity = new Vector2(moveX, rb.velocity.y); // 좌우로 움직이는 값을 저장
             }
 
             else  // a도 d도 눌리지 않은 상태라면
@@ -93,7 +101,6 @@ public class PlayerMoving : MonoBehaviour
             Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(posPlayer.position, boxSize, 0);  // 적에 닿는 충돌 검사
             foreach (Collider2D collider in collider2DsPlayer)
             {
-                // Debug.Log("Touched : " + collider.tag);
                 if (collider.tag == "Enemy")
                 {
                     Die();
@@ -104,7 +111,7 @@ public class PlayerMoving : MonoBehaviour
 
     public bool attacked = false;
 
-    void AttackTrue()
+    void AttackTrue()  // Enemy에서 공격당하고 있는지 여부를 판단
     {
         attacked = true;
     }
@@ -121,9 +128,6 @@ public class PlayerMoving : MonoBehaviour
 
     void Die()  // 해당 태그에 닿았을 때
     {
-        //if (col.CompareTag("Enemy"))  // 적에게 닿으면
-        //{
-            transform.position = new Vector3(-315.7418f, -58.85741f, 599.7907f);  // 처음에 있던 위치로 (게임오버 개념. 게임오버 추가할 것)
-        //}
+        transform.position = new Vector3(-315.7418f, -58.85741f, 599.7907f);  // 처음에 있던 위치로 (게임오버 개념. 게임오버 추가할 것)
     }
 }

@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
         Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);  // 플레이어의 공격이 닿는지 검사
         foreach (Collider2D collider in collider2DsPlayer)
         {
-            if (collider.tag == "PlayerAttack")
+            if (collider.tag == "PlayerAttack")  // 근접 공격에 맞으면
             {
                 if (player.attacked)  // 플레이어가 공격 상태면
                 {
@@ -81,27 +81,24 @@ public class Enemy : MonoBehaviour
         }
     }
 
-        /*private void OnTriggerEnter2D(Collider2D col)  // 해당 태그에 닿았을 때  (기존 코드인데 위에 코드로 바꿈. 혹시 모르니 놔둠.)
-        {
-            if (col.CompareTag("PlayerAttack"))
-            {
-                if (player.attacked)
-                {
-                    //nowHp -= player.atkDmg;
-                    nowHp -= 10;
-                    //player.attacked = false;
+    private void OnTriggerEnter2D(Collider2D col)  // 해당 태그에 닿았을 때 
+    {
+        if (col.CompareTag("PlayerMagicAttack"))
+        {  // 마법 발사체에 맞으면
+            Debug.Log("1");
+            Destroy(col.gameObject);  // 맞은 발사체 제거
 
-                    if (nowHp <= 0) // 적 사망
-                    {
-                        Die();
-                    }
-                    else
-                    {
-                        Attacked();  // 공격 받는 모션
-                    }
-                }
+            nowHp -= 30;
+            if (nowHp <= 0) // 적 사망
+            {
+                Die();
             }
-        }*/
+            else
+            {
+                Attacked();  // 공격 받는 모션
+            }
+        }
+    }
 
     public Transform target;
 
@@ -109,17 +106,14 @@ public class Enemy : MonoBehaviour
     {
         enemyAnimator.SetTrigger("Attacked");
 
-        Debug.Log(target.position.x + " : " + transform.position.x);
         float dir = target.position.x - transform.position.x;
-        if(dir < 0)  // 적과 플레이어 위치에 따라 뒤로 20만큼 넉백 줌
+        if(dir < 0)  // 적과 플레이어 위치에 따라 뒤로 넉백 줌
         {
-            Debug.Log("오른쪽 넉백!");
-            transform.Translate(new Vector2(300, 0) * 100 * Time.deltaTime);
+            transform.Translate(new Vector2(30, 0) * 100 * Time.deltaTime);
         }
         else
         {
-            Debug.Log("왼쪽 넉백!");
-            transform.Translate(new Vector2(-300, 0) * 100 * Time.deltaTime);
+            transform.Translate(new Vector2(-30, 0) * 100 * Time.deltaTime);
         }
     }
 
