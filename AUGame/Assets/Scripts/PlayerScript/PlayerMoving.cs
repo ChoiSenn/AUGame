@@ -17,6 +17,8 @@ public class PlayerMoving : MonoBehaviour
     public Transform pos;
     public Vector2 boxSize;
 
+    public Transform posPlayer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -87,6 +89,16 @@ public class PlayerMoving : MonoBehaviour
                     //Debug.Log(collider.tag);
                 }
             }
+
+            Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(posPlayer.position, boxSize, 0);  // 적에 닿는 충돌 검사
+            foreach (Collider2D collider in collider2DsPlayer)
+            {
+                // Debug.Log("Touched : " + collider.tag);
+                if (collider.tag == "Enemy")
+                {
+                    Die();
+                }
+            }
         }
     }
 
@@ -101,17 +113,17 @@ public class PlayerMoving : MonoBehaviour
         attacked = false;
     }
 
-    private void OnDrawGizmos()  // 피격 범위 그리기 
+    private void OnDrawGizmos()  // 피격 범위 그리기  (지워도 되는 코드)
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(pos.position, boxSize);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)  // 해당 태그에 닿았을 때
+    void Die()  // 해당 태그에 닿았을 때
     {
-        if (col.CompareTag("Enemy"))  // 적에게 닿으면
-        {
+        //if (col.CompareTag("Enemy"))  // 적에게 닿으면
+        //{
             transform.position = new Vector3(-315.7418f, -58.85741f, 599.7907f);  // 처음에 있던 위치로 (게임오버 개념. 게임오버 추가할 것)
-        }
+        //}
     }
 }

@@ -35,6 +35,9 @@ public class Enemy : MonoBehaviour
     Image nowHpbar;
     public Animator enemyAnimator;
 
+    public Transform pos;
+    public Vector2 boxSize;
+
     void Start()
     {
         hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
@@ -53,28 +56,52 @@ public class Enemy : MonoBehaviour
             (new Vector3(transform.position.x, transform.position.y + height, 0));
         hpBar.position = _hpBarPos;
         nowHpbar.fillAmount = (float)nowHp / (float)maxHp;
-    }
-    private void OnTriggerEnter2D(Collider2D col)  // 해당 태그에 닿았을 때
-    {
-        if (col.CompareTag("PlayerAttack"))
-        {
-            if (player.attacked)
-            {
-                //nowHp -= player.atkDmg;
-                nowHp -= 10;
-                //player.attacked = false;
 
-                if (nowHp <= 0) // 적 사망
+        Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);  // 플레이어의 공격이 닿는지 검사
+        foreach (Collider2D collider in collider2DsPlayer)
+        {
+            if (collider.tag == "PlayerAttack")
+            {
+                if (player.attacked)  // 플레이어가 공격 상태면
                 {
-                    Die();
-                }
-                else
-                {
-                    Attacked();  // 공격 받는 모션
+                    //nowHp -= player.atkDmg;
+                    nowHp -= 10;  // 데미지 받고
+                    player.attacked = false;
+
+                    if (nowHp <= 0) // 적 사망
+                    {
+                        Die();
+                    }
+                    else
+                    {
+                        Attacked();  // 공격 받는 모션
+                    }
                 }
             }
         }
     }
+
+        /*private void OnTriggerEnter2D(Collider2D col)  // 해당 태그에 닿았을 때  (기존 코드인데 위에 코드로 바꿈. 혹시 모르니 놔둠.)
+        {
+            if (col.CompareTag("PlayerAttack"))
+            {
+                if (player.attacked)
+                {
+                    //nowHp -= player.atkDmg;
+                    nowHp -= 10;
+                    //player.attacked = false;
+
+                    if (nowHp <= 0) // 적 사망
+                    {
+                        Die();
+                    }
+                    else
+                    {
+                        Attacked();  // 공격 받는 모션
+                    }
+                }
+            }
+        }*/
 
     public Transform target;
 
@@ -82,14 +109,17 @@ public class Enemy : MonoBehaviour
     {
         enemyAnimator.SetTrigger("Attacked");
 
+        Debug.Log(target.position.x + " : " + transform.position.x);
         float dir = target.position.x - transform.position.x;
         if(dir < 0)  // 적과 플레이어 위치에 따라 뒤로 20만큼 넉백 줌
         {
-            transform.Translate(new Vector2(20, 0) * 100 * Time.deltaTime);
+            Debug.Log("오른쪽 넉백!");
+            transform.Translate(new Vector2(300, 0) * 100 * Time.deltaTime);
         }
         else
         {
-            transform.Translate(new Vector2(-20, 0) * 100 * Time.deltaTime);
+            Debug.Log("왼쪽 넉백!");
+            transform.Translate(new Vector2(-300, 0) * 100 * Time.deltaTime);
         }
     }
 
@@ -100,8 +130,8 @@ public class Enemy : MonoBehaviour
         GetComponent<EnemyAI>().enabled = false;    // 추적 비활성화
         GetComponent<Collider2D>().enabled = false; // 충돌체 비활성화
         Destroy(GetComponent<Rigidbody2D>());       // 중력 비활성화
-        Destroy(gameObject, 1);                     // 3초후 제거
-        Destroy(hpBar.gameObject, 1);               // 3초후 체력바 제거
+        Destroy(gameObject, 1);                     // 1초후 제거
+        Destroy(hpBar.gameObject, 1);               // 1초후 체력바 제거
     }
 
     void SetAttackSpeed(float speed)
