@@ -29,6 +29,10 @@ public class PlayerMoving : MonoBehaviour
 
     void Update()
     {
+        if (transform.position.y <= -150)   // 플레이어가 추락하면 사망 판정
+        {
+            Die();
+        }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))  // 공격 중이라면 멈춤
         {
