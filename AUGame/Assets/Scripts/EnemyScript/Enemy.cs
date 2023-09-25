@@ -85,7 +85,6 @@ public class Enemy : MonoBehaviour
     {
         if (col.CompareTag("PlayerMagicAttack"))
         {  // 마법 발사체에 맞으면
-            Debug.Log("1");
             Destroy(col.gameObject);  // 맞은 발사체 제거
 
             nowHp -= 30;

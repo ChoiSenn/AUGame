@@ -376,9 +376,17 @@
 "Assets/Scripts/EnemyScript/Enemy.cs"
 "Assets/Scripts/EnemyScript/EnemyAI.cs"
 "Assets/Scripts/ETCScript/CameraFollow.cs"
+"Assets/Scripts/InventoryScript/Inventory.cs"
+"Assets/Scripts/InventoryScript/IObjectItem.cs"
+"Assets/Scripts/InventoryScript/Item.cs"
+"Assets/Scripts/InventoryScript/ObjectItem.cs"
+"Assets/Scripts/InventoryScript/SelectObject.cs"
+"Assets/Scripts/InventoryScript/Slot.cs"
+"Assets/Scripts/InventoryScript/UIInventoryClick.cs"
 "Assets/Scripts/PlayerScript/AttackAreaPosition.cs"
 "Assets/Scripts/PlayerScript/FireMagic.cs"
 "Assets/Scripts/PlayerScript/MagicAttack.cs"
+"Assets/Scripts/PlayerScript/Player Inventory.cs"
 "Assets/Scripts/PlayerScript/PlayerMoving.cs"
 -langversion:9.0
 

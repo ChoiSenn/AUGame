@@ -19,6 +19,8 @@ public class PlayerMoving : MonoBehaviour
 
     public Transform posPlayer;
 
+    [Header("인벤토리")]
+    public Inventory inventory;
     public string magic = null;
 
     void Start()
@@ -40,10 +42,16 @@ public class PlayerMoving : MonoBehaviour
         }
         else  // 공격 중이 아닐 때 이동 가능
         {
-            if (Input.GetKey(KeyCode.E)) // 마법 테스트용 코드!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (inventory.items.Count <= 0)  // 아이템 배열이 비어있으면
             {
+                magic = null;
+            }
+            else if (inventory.items[0].name == "FireItem") // 마법서의 마법 여부에 따라 마법 사용
+            {  // 첫 번째 칸이 불이면 불 마법
                 magic = "fire";
-            } else if (Input.GetKey(KeyCode.Q))
+
+            } 
+            else
             {
                 magic = null;
             }

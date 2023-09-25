@@ -24,7 +24,7 @@ public class fireMagic : MonoBehaviour
         {
             if (ray.collider.tag == "Enemy") // 태그 Enemy 생성, 슬라임에게 할당 후 사용.
             {
-                Debug.Log("명중!");
+                // Debug.Log("명중!");
 
             }
             DestroyFire();
