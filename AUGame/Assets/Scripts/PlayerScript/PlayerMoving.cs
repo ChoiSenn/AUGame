@@ -23,6 +23,8 @@ public class PlayerMoving : MonoBehaviour
     public Inventory inventory;
     public string magic = null;
 
+    public GameObject jump;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -92,6 +94,9 @@ public class PlayerMoving : MonoBehaviour
 
             if (rb.velocity.y == 0)  // 공중에 떠있으면 점프 모션
             {
+                //var jum = Instantiate(jump, transform.position, Quaternion.identity);
+                //Destroy(jum, 0.5f);
+
                 animator.SetBool("Jumping", false);  // 점프 모션 해제
             }
             else
@@ -138,8 +143,24 @@ public class PlayerMoving : MonoBehaviour
         Gizmos.DrawWireCube(pos.position, boxSize);
     }
 
-    void Die()  // 해당 태그에 닿았을 때
+    public GameObject explosion;
+
+    void Die()  // 사망 처리
     {
+        var explo = Instantiate(explosion, transform.position, Quaternion.identity);
+        Destroy(explo, 1);
+        StartCoroutine(WaitFor());
         transform.position = new Vector3(-315.7418f, -58.85741f, 599.7907f);  // 처음에 있던 위치로 (게임오버 개념. 게임오버 추가할 것)
+    }
+    
+    IEnumerator WaitFor()  // 3초 기다리기... 왜 작동 안 함??
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        Empty();
+    }
+
+    public void Empty()
+    {
+
     }
 }

@@ -101,9 +101,14 @@ public class Enemy : MonoBehaviour
 
     public Transform target;
 
+    public GameObject explosion;
+
     void Attacked()  // 공격당하면 움찔거리는 모션 추가
     {
         enemyAnimator.SetTrigger("Attacked");
+
+        var explo = Instantiate(explosion, transform.position, Quaternion.identity);
+        Destroy(explo, 0.5f);
 
         float dir = target.position.x - transform.position.x;
         if(dir < 0)  // 적과 플레이어 위치에 따라 뒤로 넉백 줌

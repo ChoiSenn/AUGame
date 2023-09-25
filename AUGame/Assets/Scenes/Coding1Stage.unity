@@ -510,6 +510,7 @@ MonoBehaviour:
   pos: {fileID: 169655166}
   boxSize: {x: 30, y: 30}
   target: {fileID: 1299340261}
+  explosion: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}
 --- !u!61 &169655168
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1194,6 +1195,7 @@ MonoBehaviour:
   pos: {fileID: 586929711}
   boxSize: {x: 30, y: 30}
   target: {fileID: 1299340261}
+  explosion: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}
 --- !u!114 &586929710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8237,7 +8239,9 @@ MonoBehaviour:
   posPlayer: {fileID: 1299340261}
   inventory: {fileID: 1345279372}
   magic: 
+  jump: {fileID: 1604227354005263177, guid: d6d04e4b024a73147a9b9f10d607f384, type: 3}
   attacked: 0
+  explosion: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}
 --- !u!95 &1299340263
 Animator:
   serializedVersion: 5
@@ -9743,6 +9747,7 @@ MonoBehaviour:
   pos: {fileID: 1657526139}
   boxSize: {x: 30, y: 30}
   target: {fileID: 1299340261}
+  explosion: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}
 --- !u!114 &1657526138
 MonoBehaviour:
   m_ObjectHideFlags: 0
