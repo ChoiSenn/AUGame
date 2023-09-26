@@ -25,10 +25,15 @@ public class PlayerMoving : MonoBehaviour
 
     public GameObject jump;
 
+    public GameObject MagicScrollCanvas;  // 마법서 UI
+    bool MagicScrollCanvasFlag = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        MagicScrollCanvas.SetActive(false);
     }
 
     void Update()
@@ -115,12 +120,29 @@ public class PlayerMoving : MonoBehaviour
                 }
             }
 
-            Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(posPlayer.position, boxSize, 0);  // 적에 닿는 충돌 검사
+            Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(posPlayer.position, boxSize, 0);  // 닿는 충돌 검사
             foreach (Collider2D collider in collider2DsPlayer)
             {
                 if (collider.tag == "Enemy")
                 {
                     Die();
+                } else if (collider.tag == "MagicCircle")  // 마법진에 닿고
+                {
+                    if (Input.GetKeyDown(KeyCode.Q)) // Q를 눌렀을 때
+                    {
+                        if (!MagicScrollCanvasFlag)  // 마법스크롤이 안 열려있으면
+                        {
+                            Debug.Log("마법서 열림");
+                            MagicScrollCanvasFlag = true;
+                            MagicScrollCanvas.SetActive(true);  // 열고
+                        }
+                        else  // 열려있으면
+                        {
+                            Debug.Log("마법서 닫힘");
+                            MagicScrollCanvasFlag = false;
+                            MagicScrollCanvas.SetActive(false);  // 닫음
+                        }
+                    }
                 }
             }
         }

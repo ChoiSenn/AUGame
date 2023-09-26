@@ -19,8 +19,6 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))  // 클릭해서 마법서에 담는 코드
         {
-            Debug.Log(inventory);
-
             Vector4 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             // RaycaseHit2D가 클릭된 곳에 오브젝트가 있나 체크
