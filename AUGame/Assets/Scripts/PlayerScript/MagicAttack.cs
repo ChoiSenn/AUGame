@@ -24,7 +24,7 @@ public class MagicAttack : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) // 마우스 좌클릭 시
             {
-                if(player.magic == "fire")  // 현재 마법 여부에 따라 공격이 바뀜
+                if(player.magic == "Fire Item")  // 현재 마법 여부에 따라 공격이 바뀜
                 {
                     Instantiate(fire, pos.position, transform.rotation); // 받아온 불 이미지 발사
                 }

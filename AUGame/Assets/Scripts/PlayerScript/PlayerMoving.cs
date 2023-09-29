@@ -21,7 +21,9 @@ public class PlayerMoving : MonoBehaviour
 
     [Header("인벤토리")]
     public Inventory inventory;
-    public string magic = null;
+
+    public UIInventoryClick uiInven;
+    public string magic = "";
 
     public GameObject jump;
 
@@ -32,12 +34,15 @@ public class PlayerMoving : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        inventory = GetComponent<Inventory>();
 
         MagicScrollCanvas.SetActive(false);
     }
 
     void Update()
     {
+        magic = uiInven.nowMagic;
+
         if (transform.position.y <= -150)   // 플레이어가 추락하면 사망 판정
         {
             Die();
@@ -49,20 +54,6 @@ public class PlayerMoving : MonoBehaviour
         }
         else  // 공격 중이 아닐 때 이동 가능
         {
-            if (inventory.items.Count <= 0)  // 아이템 배열이 비어있으면
-            {
-                magic = null;
-            }
-            else if (inventory.items[0].name == "FireItem") // 마법서의 마법 여부에 따라 마법 사용
-            {  // 첫 번째 칸이 불이면 불 마법
-                magic = "fire";
-
-            } 
-            else
-            {
-                magic = null;
-            }
-
             // 이동
             if (Input.GetKey(KeyCode.A)) // A를 눌렀을 때
             {
@@ -135,12 +126,14 @@ public class PlayerMoving : MonoBehaviour
                             Debug.Log("마법서 열림");
                             MagicScrollCanvasFlag = true;
                             MagicScrollCanvas.SetActive(true);  // 열고
+                            Time.timeScale = 0f;
                         }
                         else  // 열려있으면
                         {
                             Debug.Log("마법서 닫힘");
                             MagicScrollCanvasFlag = false;
                             MagicScrollCanvas.SetActive(false);  // 닫음
+                            Time.timeScale = 1f;
                         }
                     }
                 }

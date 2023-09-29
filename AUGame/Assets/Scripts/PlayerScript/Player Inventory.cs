@@ -39,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
         if (clickInterface != null) // clickInterface가 인터페이스를 가지고 있을 시.
         {
             Item item = clickInterface.ClickItem(); // item에 클릭된 오브젝트의 아이템 정보를 넘김
-            print($"{item.itemName}");
+            //($"{item.itemName}");
             inventory.AddItem(item);
         }
     }
