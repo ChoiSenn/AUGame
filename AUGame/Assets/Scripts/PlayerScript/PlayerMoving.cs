@@ -126,14 +126,14 @@ public class PlayerMoving : MonoBehaviour
                             Debug.Log("마법서 열림");
                             MagicScrollCanvasFlag = true;
                             MagicScrollCanvas.SetActive(true);  // 열고
-                            Time.timeScale = 0f;
+                            //Time.timeScale = 0f;
                         }
                         else  // 열려있으면
                         {
                             Debug.Log("마법서 닫힘");
                             MagicScrollCanvasFlag = false;
                             MagicScrollCanvas.SetActive(false);  // 닫음
-                            Time.timeScale = 1f;
+                            //Time.timeScale = 1f;
                         }
                     }
                 }

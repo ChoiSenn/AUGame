@@ -14,23 +14,26 @@ public class MagicScrollScript : MonoBehaviour
     public Text ErrorText;  // 오류 띄울 우측 텍스트
     public Text HintText;  // 힌트 띄울 우측 텍스트
 
+    public UIInventoryClick uiInven;
+    public bool BlindOut = false;  // Bar를 변수 자리에 넣어 블라인드가 사라졌는지
+    public GameObject BlindBtn;
+
     void Update()
     {
-        
     }
 
     public void Resume()
     {
         MagicScrollCanvas.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
+        //Time.timeScale = 1f;
+        //GameIsPaused = false;
     }
 
     public void Pause()
     {
         MagicScrollCanvas.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        //Time.timeScale = 0f;
+        //GameIsPaused = true;
     }
 
     public void CompileButton()  // 컴파일 버튼
@@ -41,7 +44,12 @@ public class MagicScrollScript : MonoBehaviour
         string hint = "힌트 없음";
         int Bar_Y_Position = 0;
 
-        if(code.Length <= 14 || code.Substring(0, 14) != "Bar_Y_Position")  // 코드 길이가 짧거나 앞에 Bar_Y_Position가 아니면 에러
+        if(BlindOut == false)
+        {
+            errorMessage = "변수 할당이 잘못되었음.";
+            hint = "움직이고자 하는 사물을 제대로 칸에 할당했는지 확인하세요!";
+        }
+        else if(code.Length <= 14 || code.Substring(0, 14) != "Bar_Y_Position")  // 코드 길이가 짧거나 앞에 Bar_Y_Position가 아니면 에러
         {
             errorMessage = "변경하고자 하는 변수의 값이 잘못되었음";
             hint = "어떤 값을 변경해야 하는지 확인하세요!";
@@ -79,7 +87,6 @@ public class MagicScrollScript : MonoBehaviour
         if (Bar_Y_Position != 0)  // 0이 아닌 경우 바 이동
         {
             BarMoving(Bar_Y_Position);
-            ErrorText.text = "정답!";
         }
         else
         {
@@ -106,5 +113,20 @@ public class MagicScrollScript : MonoBehaviour
     public void ResetButton()
     {
         Bar.transform.position = new Vector3(1251, 55, 0);
+    }
+
+    public void BlindButton()
+    {
+        Vector4 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (uiInven.nowMagic == "Bar Item")
+        {
+            Destroy(BlindBtn);
+            BlindOut = true;
+        }
+        else
+        {
+            ErrorText.text = "이동시켜야 할 물체가 틀렸습니다!";
+        }
     }
 }

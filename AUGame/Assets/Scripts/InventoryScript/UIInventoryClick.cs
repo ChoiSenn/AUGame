@@ -41,7 +41,6 @@ public class UIInventoryClick : MonoBehaviour
         {
             if (clickedObject == slot1.gameObject)  // 1번 슬롯에 들어있는 마법 확인
             {
-                Debug.Log(slot1.item);
                 nowMagic = slot1.item.itemName;
                 slotImage1.color = Color.grey;
                 slotImage2.color = Color.white;
@@ -49,7 +48,6 @@ public class UIInventoryClick : MonoBehaviour
             }
             else if (clickedObject == slot2.gameObject)
             {
-                Debug.Log(slot2.item);
                 nowMagic = slot2.item.itemName;
                 slotImage2.color = Color.grey;
                 slotImage1.color = Color.white;
@@ -57,7 +55,6 @@ public class UIInventoryClick : MonoBehaviour
             }
             else if (clickedObject == slot3.gameObject)
             {
-                Debug.Log(slot3.item);
                 nowMagic = slot3.item.itemName;
                 slotImage3.color = Color.gray;
                 slotImage1.color = Color.white;
