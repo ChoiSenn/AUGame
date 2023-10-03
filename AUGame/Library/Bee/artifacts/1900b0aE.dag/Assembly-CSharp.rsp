@@ -384,6 +384,7 @@
 "Assets/Scripts/InventoryScript/Slot.cs"
 "Assets/Scripts/InventoryScript/UIInventoryClick.cs"
 "Assets/Scripts/MagicScrollScript/MagicScrollScript.cs"
+"Assets/Scripts/MagicScrollScript/MagicScrollScript2.cs"
 "Assets/Scripts/PlayerScript/AttackAreaPosition.cs"
 "Assets/Scripts/PlayerScript/FireMagic.cs"
 "Assets/Scripts/PlayerScript/MagicAttack.cs"

@@ -25,10 +25,12 @@ public class PlayerMoving : MonoBehaviour
     public UIInventoryClick uiInven;
     public string magic = "";
 
+    public bool isJump = false;
     public GameObject jump;
 
     public GameObject MagicScrollCanvas;  // 마법서 UI
-    bool MagicScrollCanvasFlag = false;
+    public bool MagicScrollCanvasFlag = false;
+    public GameObject MagicScrollCanvas2;  // 마법서2 UI
 
     void Start()
     {
@@ -37,6 +39,7 @@ public class PlayerMoving : MonoBehaviour
         inventory = GetComponent<Inventory>();
 
         MagicScrollCanvas.SetActive(false);
+        MagicScrollCanvas2.SetActive(false);
     }
 
     void Update()
@@ -55,7 +58,7 @@ public class PlayerMoving : MonoBehaviour
         else  // 공격 중이 아닐 때 이동 가능
         {
             // 이동
-            if (Input.GetKey(KeyCode.A)) // A를 눌렀을 때
+            if (Input.GetKey(KeyCode.A) && !MagicScrollCanvasFlag) // A를 눌렀을 때
             {
                 animator.SetBool("Walking", true);  // 걷고있음
                 animator.SetBool("MoveLeft", true);  // 왼쪽
@@ -64,7 +67,7 @@ public class PlayerMoving : MonoBehaviour
                 transform.position = transform.position + transform.right * Time.deltaTime * speed;
             }
 
-            else if (Input.GetKey(KeyCode.D)) // D를 눌렀을 때
+            else if (Input.GetKey(KeyCode.D) && !MagicScrollCanvasFlag) // D를 눌렀을 때
             {
                 animator.SetBool("Walking", true);  // 걷고있음
                 animator.SetBool("MoveLeft", false);  // 오른쪽
@@ -78,17 +81,18 @@ public class PlayerMoving : MonoBehaviour
                 animator.SetBool("Walking", false);  // 멈춤
             }
 
-            if (Input.GetKeyDown(KeyCode.Space)) // 스페이스를 눌렀을 때
+            if (Input.GetKeyDown(KeyCode.Space) && !MagicScrollCanvasFlag) // 스페이스를 눌렀을 때
             {
-                if (rb.velocity.y == 0) // Y의 값이 0이면 점프
+                if (!isJump) // 점프 중이 아니면 점프
                 {
                     rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
 
                     animator.SetBool("Jumping", true);  // 점프 모션
+                    isJump = true;
                 }
             }
 
-            if (rb.velocity.y == 0)  // 공중에 떠있으면 점프 모션
+            if (!isJump)  // 점프 중이면 점프 모션
             {
                 //var jum = Instantiate(jump, transform.position, Quaternion.identity);
                 //Destroy(jum, 0.5f);
@@ -100,7 +104,7 @@ public class PlayerMoving : MonoBehaviour
                 animator.SetBool("Jumping", true);  // 점프 모션
             }
 
-            if (Input.GetMouseButtonDown(0) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            if (Input.GetMouseButtonDown(0) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !MagicScrollCanvasFlag)
             { // 좌클릭이 눌렸고 Attack 애니메이션이 실행되고 있지 않다면
                 animator.SetTrigger("Attack");  // Attack 트리거를 설정하여 공격 모션
 
@@ -117,7 +121,8 @@ public class PlayerMoving : MonoBehaviour
                 if (collider.tag == "Enemy")
                 {
                     Die();
-                } else if (collider.tag == "MagicCircle")  // 마법진에 닿고
+                }
+                else if (collider.tag == "MagicCircle")  // 마법진에 닿고
                 {
                     if (Input.GetKeyDown(KeyCode.Q)) // Q를 눌렀을 때
                     {
@@ -126,18 +131,46 @@ public class PlayerMoving : MonoBehaviour
                             Debug.Log("마법서 열림");
                             MagicScrollCanvasFlag = true;
                             MagicScrollCanvas.SetActive(true);  // 열고
-                            //Time.timeScale = 0f;
+                            Time.timeScale = 0f;
                         }
                         else  // 열려있으면
                         {
                             Debug.Log("마법서 닫힘");
                             MagicScrollCanvasFlag = false;
                             MagicScrollCanvas.SetActive(false);  // 닫음
-                            //Time.timeScale = 1f;
+                            Time.timeScale = 1f;
+                        }
+                    }
+                }
+                else if (collider.tag == "MagicCircle2")  // 마법진2에 닿고
+                {
+                    if (Input.GetKeyDown(KeyCode.Q)) // Q를 눌렀을 때
+                    {
+                        if (!MagicScrollCanvasFlag)  // 마법스크롤이 안 열려있으면
+                        {
+                            Debug.Log("마법서 열림");
+                            MagicScrollCanvasFlag = true;
+                            MagicScrollCanvas2.SetActive(true);  // 열고
+                            Time.timeScale = 0f;
+                        }
+                        else  // 열려있으면
+                        {
+                            Debug.Log("마법서 닫힘");
+                            MagicScrollCanvasFlag = false;
+                            MagicScrollCanvas2.SetActive(false);  // 닫음
+                            Time.timeScale = 1f;
                         }
                     }
                 }
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Equals("Floor") || collision.gameObject.name.Equals("Block") || collision.gameObject.name.Equals("Bar") || collision.gameObject.name.Equals("Block(Clone)"))
+        {  // 바닥이나 블록이나 바를 밟으면 점프 중이 아니라는 판정
+            isJump = false;
         }
     }
 

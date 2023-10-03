@@ -9,6 +9,8 @@ TagManager:
   - PlayerMagicAttack
   - MagicCircle
   - BlindInput
+  - MagicCircle2
+  - CreateBlock
   layers:
   - Default
   - TransparentFX

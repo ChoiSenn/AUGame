@@ -134,6 +134,6 @@ public class Enemy : MonoBehaviour
 
     void SetAttackSpeed(float speed)
     {
-        enemyAnimator.SetFloat("attackSpeed", speed);
+        //enemyAnimator.SetFloat("attackSpeed", speed);
     }
 }

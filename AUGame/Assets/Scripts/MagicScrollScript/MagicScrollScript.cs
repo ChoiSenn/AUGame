@@ -18,6 +18,15 @@ public class MagicScrollScript : MonoBehaviour
     public bool BlindOut = false;  // Bar를 변수 자리에 넣어 블라인드가 사라졌는지
     public GameObject BlindBtn;
 
+    public PlayerMoving playerMoving;
+
+    public int Bar_Y_Position = 0;
+
+    void Start()
+    {
+        //Time.timeScale = 0f;  // 시작 시 멈추게. 이건 Player Moving에서 적용
+    }
+
     void Update()
     {
     }
@@ -42,7 +51,6 @@ public class MagicScrollScript : MonoBehaviour
         string code = CodeInput.text;
         string errorMessage = "에러 메시지 없음";
         string hint = "힌트 없음";
-        int Bar_Y_Position = 0;
 
         if(BlindOut == false)
         {
@@ -86,7 +94,11 @@ public class MagicScrollScript : MonoBehaviour
 
         if (Bar_Y_Position != 0)  // 0이 아닌 경우 바 이동
         {
-            BarMoving(Bar_Y_Position);
+            Time.timeScale = 1f;  // 시간 흐르게 만들고
+            MagicScrollCanvas.SetActive(false);  // 마법스크롤 창 닫고
+            playerMoving.MagicScrollCanvasFlag = false;
+
+            Invoke("BarMovingFunc", 1);
         }
         else
         {
@@ -95,17 +107,20 @@ public class MagicScrollScript : MonoBehaviour
         }
     }
 
+    void BarMovingFunc()
+    {
+        BarMoving(Bar_Y_Position);  // 바 움직임
+    }
+
     public GameObject explosion;
 
     void BarMoving(int bar_Y_Position)
     {
-        MagicScrollCanvas.SetActive(false);
-
         //Debug.Log("실행 : " + bar_Y_Position);
         var explo = Instantiate(explosion, Bar.transform.position, Quaternion.identity);
         Destroy(explo, 0.5f);
 
-        Vector3 destination = new Vector3(Bar.transform.position.x, -(16000 *bar_Y_Position), 0);
+        Vector3 destination = new Vector3(Bar.transform.position.x, -(160000 * bar_Y_Position), 0);
         Vector3 speed = Vector3.zero; // (0,0,0) 은 .zero 로도 표현가능
         Bar.transform.position = Vector3.SmoothDamp(Bar.transform.position, destination, ref speed, 0.1f);
     }
