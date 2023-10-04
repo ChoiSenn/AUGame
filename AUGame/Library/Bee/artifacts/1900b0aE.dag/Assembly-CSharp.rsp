@@ -390,6 +390,7 @@
 "Assets/Scripts/PlayerScript/MagicAttack.cs"
 "Assets/Scripts/PlayerScript/Player Inventory.cs"
 "Assets/Scripts/PlayerScript/PlayerMoving.cs"
+"Assets/Scripts/SceneScript/StageClear.cs"
 -langversion:9.0
 
 /deterministic
