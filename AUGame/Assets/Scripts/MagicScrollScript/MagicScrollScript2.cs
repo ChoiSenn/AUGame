@@ -18,9 +18,9 @@ public class MagicScrollScript2 : MonoBehaviour
 
     public int forCount;  // for문 돌릴 개수
 
-    //public UIInventoryClick uiInven;
-    //public bool BlindOut = false;  // Bar를 변수 자리에 넣어 블라인드가 사라졌는지
-    //public GameObject BlindBtn;
+    public UIInventoryClick uiInven;
+    public bool BlindOut = false;  // Bar를 변수 자리에 넣어 블라인드가 사라졌는지
+    public GameObject BlindBtn;
 
     public PlayerMoving playerMoving;
 
@@ -123,16 +123,16 @@ public class MagicScrollScript2 : MonoBehaviour
 
     public void BlindButton()
     {
-        //Vector4 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector4 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        //if (uiInven.nowMagic == "Bar Item")
-        //{
-        //    Destroy(BlindBtn);
-        //    BlindOut = true;
-        //}
-        //else
-        //{
-        //    ErrorText.text = "이동시켜야 할 물체가 틀렸습니다!";
-        //}
+        if (uiInven.nowMagic == "Block Item")
+        {
+            Destroy(BlindBtn);
+            BlindOut = true;
+        }
+        else
+        {
+            ErrorText.text = "이동시켜야 할 물체가 틀렸습니다!";
+        }
     }
 }
