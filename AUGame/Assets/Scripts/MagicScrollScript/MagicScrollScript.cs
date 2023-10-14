@@ -22,6 +22,8 @@ public class MagicScrollScript : MonoBehaviour
 
     public int Bar_Y_Position = 0;
 
+    public int failCount = 0;
+
     void Start()
     {
         //Time.timeScale = 0f;  // 시작 시 멈추게. 이건 Player Moving에서 적용
@@ -54,17 +56,18 @@ public class MagicScrollScript : MonoBehaviour
 
         if(BlindOut == false)
         {
-            errorMessage = "변수 할당이 잘못되었음.";
-            hint = "움직이고자 하는 사물을 제대로 칸에 할당했는지 확인하세요!";
+            errorMessage = "변수 할당이 잘못되었음. 움직이고자 하는 사물을 제대로 칸에 할당했는지 확인하세요!";
         }
         else if(code.Length <= 14 || code.Substring(0, 14) != "Bar_Y_Position")  // 코드 길이가 짧거나 앞에 Bar_Y_Position가 아니면 에러
         {
-            errorMessage = "변경하고자 하는 변수의 값이 잘못되었음";
-            hint = "어떤 값을 변경해야 하는지 확인하세요!";
+            errorMessage = "변경하고자 하는 변수의 값이 잘못되었음. 어떤 값을 변경해야 하는지 확인하세요!";
+
+            failCount += 1;
         } else if(code.Substring(code.Length-1) != ";")  // 마지막에 ;로 안 끝나면
         {
-            errorMessage = "구문 오류!";
-            hint = "마지막에 ;를 붙였는지 확인하세요!";
+            errorMessage = "구문 오류! 마지막에 ;를 붙였는지 확인하세요!";
+
+            failCount += 1;
         }
         else
         {
@@ -87,9 +90,21 @@ public class MagicScrollScript : MonoBehaviour
             }
             else
             {
-                errorMessage = "구문 오류!";
-                hint = "코드를 다시 한 번 확인하세요!";
+                errorMessage = "구문 오류! 코드를 다시 한 번 확인하세요!";
+
+                failCount += 1;
             }
+        }
+
+        if (failCount == 1)  // n번 이상 구문 오류로 틀렸을 경우 추가 힌트 출력
+        {
+            hint = "hint 1. 발판을 낮추려면 어떤 코드를 작성해야 할지 생각해보자.";
+        } else if (failCount == 2)
+        {
+            hint = "hint 1. 발판을 낮추려면 어떤 코드를 작성해야 할지 생각해보자.\nhint.2 발판의 Y축 값을 낮춰야 위치를 낮출 수 있다.";
+        } else if (failCount >= 3)
+        {
+            hint = "hint 1. 발판을 낮추려면 어떤 코드를 작성해야 할지 생각해보자.\nhint 2. 발판의 Y축 값을 낮춰야 위치를 낮출 수 있다.\nhint 3. 변수의 값을 낮추기 위해서는 (변수) -= (값); 형식의 코드가 필요하다.";
         }
 
         if (Bar_Y_Position != 0)  // 0이 아닌 경우 바 이동

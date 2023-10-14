@@ -24,7 +24,7 @@ public class MagicScrollScript2 : MonoBehaviour
 
     public PlayerMoving playerMoving;
 
-    //public int Bar_Y_Position = 0;
+    public int failCount = 0;
 
     void Start()
     {
@@ -57,17 +57,17 @@ public class MagicScrollScript2 : MonoBehaviour
 
         if (code1 != "j>=i")  // 두 번째 빈칸의 코드가 틀렸을 경우
         {
-            errorMessage = "for문의 첫 번째 빈 칸의 코드가 틀렸음.";
-            hint = "계단 형태를 만들기 위해서는 어떤 모양으로 공백이 들어가야 할지 생각해보세요!";
+            errorMessage = "for문의 첫 번째 빈 칸의 코드가 틀렸음. 계단 형태를 만들기 위해서는 어떤 모양으로 공백이 들어가야 할지 생각해보세요!";
             ErrorText.text = errorMessage;
             HintText.text = hint;
+            failCount += 1;
         }
         else if (code2 != "k<=i")  // 세 번째 빈칸의 코드가 틀렸을 경우
         {
-            errorMessage = "for문의 두 번째 빈 칸의 코드가 틀렸음.";
-            hint = "계단 형태를 만들기 위해서는 어떤 모양으로 블럭이 들어가야 할지 생각해보세요!";
+            errorMessage = "for문의 두 번째 빈 칸의 코드가 틀렸음. 계단 형태를 만들기 위해서는 어떤 모양으로 블럭이 들어가야 할지 생각해보세요!";
             ErrorText.text = errorMessage;
             HintText.text = hint;
+            failCount += 1;
         } else  // 둘 다 맞았으면
         {
             Debug.Log("계단 형태 출력 : " + forCount);
@@ -77,6 +77,26 @@ public class MagicScrollScript2 : MonoBehaviour
             playerMoving.MagicScrollCanvasFlag = false;
 
             Invoke("BlockStair", 1);
+        }
+
+        if (failCount == 1)  // n번 이상 구문 오류로 틀렸을 경우 추가 힌트 출력
+        {
+            hint = "hint 1. 벽돌을 계단 형식으로 쌓으려면 어떤 코드를 작성해야 할지 생각해보자.";
+            HintText.text = hint;
+        }
+        else if (failCount == 2)
+        {
+            hint = "hint 1. 벽돌을 계단 형식으로 쌓으려면 어떤 코드를 작성해야 할지 생각해보자.\nhint.2 첫 번째 칸은 공백을 출력하는 반복문이고, 두 번째 칸은 벽돌을 출력하는 반복문임에 주목하자.";
+            HintText.text = hint;
+        }
+        //else if (failCount >= 3)
+        //{
+        //    hint = "hint 1. 벽돌을 계단 형식으로 쌓으려면 어떤 코드를 작성해야 할지 생각해보자.\nhint 2. 첫 번째 칸은 공백을 출력하는 반복문이고, 두 번째 칸은 벽돌을 출력하는 반복문임에 주목하자.\nhint 3. 첫 번째 칸은 .";
+        //    HintText.text = hint;
+        //}
+        else
+        {
+            HintText.text = hint;
         }
     }
 

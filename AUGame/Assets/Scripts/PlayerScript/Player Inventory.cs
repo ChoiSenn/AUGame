@@ -26,6 +26,7 @@ public class PlayerInventory : MonoBehaviour
 
             if (hit.collider != null)
             { // 오브젝트를 클릭했다면 HitCheckObject(hit) 함수로 hit 정보를 넘김
+                Debug.Log(hit.collider.name);
                 HitCheckObject(hit);
             }
         }
@@ -39,7 +40,7 @@ public class PlayerInventory : MonoBehaviour
         if (clickInterface != null) // clickInterface가 인터페이스를 가지고 있을 시.
         {
             Item item = clickInterface.ClickItem(); // item에 클릭된 오브젝트의 아이템 정보를 넘김
-            //($"{item.itemName}");
+            Debug.Log($"{item.itemName}");
             inventory.AddItem(item);
         }
     }
