@@ -54,13 +54,13 @@ public class PlayerHelp : MonoBehaviour
                 helpText.text = "A, D 키로 움직일 수 있고, \nSpaceBar로 점프할 수 있어. \n 일단 조금 둘러볼까?";
             } else if(collider.name == "HelpAreaFire")
             {
-                image.sprite = spriteArr[1];
+                image.sprite = spriteArr[2];
                 helpText.text = "응? 횃불이 있네?\n우클릭으로 마법으로 변형시켜 사용할 수 있을 것 같아!";
                 // 마법 처음 담았을때 추가
             }
             else if(collider.name == "HelpAreaEnemy")
             {
-                image.sprite = spriteArr[1];
+                image.sprite = spriteArr[2];
                 helpText.text = "헉, 저건 몬스터인가? 물리치거나 조심해서 지나가야겠어...\n담아둔 마법을 써봐도 좋을 것 같네.";
             } else if(collider.name == "HelpAreaMagic")
             {
@@ -69,12 +69,12 @@ public class PlayerHelp : MonoBehaviour
                 // 마법서 처음 펼쳤을 때/해결했을때 추가
             } else if(collider.name == "HelpAreaBar")
             {
-                image.sprite = spriteArr[1];
+                image.sprite = spriteArr[3];
                 helpText.text = "길이 끊겨있네... 저 발판을 내리면 지나갈 수 있을 것 같은데?\n저 발판을 마법으로 이용하면 내려오게 할 수 있지 않을까...?";
             }
             else if (collider.name == "HelpAreaStair")
             {
-                image.sprite = spriteArr[1];
+                image.sprite = spriteArr[3];
                 helpText.text = "길이 또 끊겨있네! 계단은 저 위에 있는데 어떻게 올라가지...?\n일단 마법진에서 사용할 수 있는 마법 공식을 먼저 확인해볼까?";
             }
             // 마법서 펼쳤을때 블럭 이용하라는 힌트 추가
