@@ -51,6 +51,15 @@ public class PlayerMoving : MonoBehaviour
             Die();
         }
 
+        if (Input.GetKey(KeyCode.LeftShift))  // 쉬프트 키 눌려있다면 이동 속도 증가 (대쉬)
+        {
+            speed = 250;
+        }
+        else
+        {
+            speed = 150;
+        }
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))  // 공격 중이라면 멈춤
         {
 

@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6e29fc0baa7c24a98d4ae700e9cb0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: 
+  enemyName: Slime
   maxHp: 0
   nowHp: 0
   atkDmg: 0
@@ -355,7 +355,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 7
+  m_Constraints: 5
 --- !u!95 &3738972272100762299
 Animator:
   serializedVersion: 5

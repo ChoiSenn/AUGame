@@ -38,14 +38,30 @@ public class Enemy : MonoBehaviour
     public Transform pos;
     public Vector2 boxSize;
 
+    Renderer renderer;
+    public GameObject targetEnemy;
+
+    Rigidbody2D rigid;
+    public int nextMoveX;  //다음 행동지표를 결정할 변수
+    public int nextMoveY;
+
     void Start()
     {
-        hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
+        renderer = targetEnemy.GetComponent<Renderer>();
+        rigid = GetComponent<Rigidbody2D>();
+
         if (name.Equals("Slime"))  // 슬라임의 경우, 스텟 생성
         {
+            hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
             SetEnemyStatus("Slime", 100, 10, 1.5f, 50, 1.5f, 650f);
+            nowHpbar = hpBar.transform.GetChild(0).GetComponent<Image>();
         }
-        nowHpbar = hpBar.transform.GetChild(0).GetComponent<Image>();
+        else if (name.Equals("Bat"))  // 박쥐의 경우, 스텟 생성
+        {
+            SetEnemyStatus("Bat", 1, 10, 1.5f, 100, 1.5f, 400f);
+
+            StartCoroutine("BatMoving");  // 박쥐 움직임 반복
+        }
 
         SetAttackSpeed(atkSpeed);
     }
@@ -54,8 +70,12 @@ public class Enemy : MonoBehaviour
     {
         Vector3 _hpBarPos = Camera.main.WorldToScreenPoint
             (new Vector3(transform.position.x, transform.position.y + height, 0));
-        hpBar.position = _hpBarPos;
-        nowHpbar.fillAmount = (float)nowHp / (float)maxHp;
+
+        if (name.Equals("Slime"))
+        {
+            hpBar.position = _hpBarPos;
+            nowHpbar.fillAmount = (float)nowHp / (float)maxHp;
+        }
 
         Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);  // 플레이어의 공격이 닿는지 검사
         foreach (Collider2D collider in collider2DsPlayer)
@@ -64,17 +84,22 @@ public class Enemy : MonoBehaviour
             {
                 if (player.attacked)  // 플레이어가 공격 상태면
                 {
-                    //nowHp -= player.atkDmg;
-                    nowHp -= 10;  // 데미지 받고
-                    player.attacked = false;
+                    if (name.Equals("Slime"))
+                    {
+                        nowHp -= 10;  // 데미지 받고
+                        player.attacked = false;
 
-                    if (nowHp <= 0) // 적 사망
+                        if (nowHp <= 0) // 적 사망
+                        {
+                            Die();
+                        }
+                        else
+                        {
+                            Attacked();  // 공격 받는 모션
+                        }
+                    } else if (name.Equals("Bat"))
                     {
                         Die();
-                    }
-                    else
-                    {
-                        Attacked();  // 공격 받는 모션
                     }
                 }
             }
@@ -87,14 +112,21 @@ public class Enemy : MonoBehaviour
         {  // 마법 발사체에 맞으면
             Destroy(col.gameObject);  // 맞은 발사체 제거
 
-            nowHp -= 30;
-            if (nowHp <= 0) // 적 사망
+            if (name.Equals("Slime"))
+            {
+                nowHp -= 30;
+                if (nowHp <= 0) // 적 사망
+                {
+                    Die();
+                }
+                else
+                {
+                    Attacked();  // 공격 받는 모션
+                }
+            }
+            else if (name.Equals("Bat"))
             {
                 Die();
-            }
-            else
-            {
-                Attacked();  // 공격 받는 모션
             }
         }
     }
@@ -123,17 +155,70 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        enemyAnimator.SetTrigger("Die");            // die 애니메이션 실행
-        Debug.Log("Slime Dying!!");
-        GetComponent<EnemyAI>().enabled = false;    // 추적 비활성화
+        Color c = renderer.material.color;
+        c.a = 0.5f;
+
+        if (name.Equals("Slime"))
+        {
+            renderer.material.color = c;
+            enemyAnimator.SetTrigger("Die");            // die 애니메이션 실행
+            GetComponent<EnemySlimeAI>().enabled = false;    // 추적 비활성화
+        }
+        else
+        {
+            StopCoroutine("BatMoving");
+            var explo = Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(explo, 0.5f);
+            StartCoroutine("FadeOut");
+            StartCoroutine("FadeIn");
+            StartCoroutine("FadeOut");
+            StartCoroutine("FadeIn");
+            renderer.material.color = c;
+        }
+        //Debug.Log("Slime Dying!!");
+        
         GetComponent<Collider2D>().enabled = false; // 충돌체 비활성화
         Destroy(GetComponent<Rigidbody2D>());       // 중력 비활성화
-        Destroy(gameObject, 1);                     // 1초후 제거
-        Destroy(hpBar.gameObject, 1);               // 1초후 체력바 제거
+
+        Destroy(gameObject, 0.5f);                     // 0.5초후 제거
+        if (name.Equals("Slime"))
+        {
+            Destroy(hpBar.gameObject, 0.5f);               // 1초후 체력바 제거
+        }
     }
 
     void SetAttackSpeed(float speed)
     {
         //enemyAnimator.SetFloat("attackSpeed", speed);
+    }
+
+    IEnumerator FadeOut()
+    {
+        Color c = renderer.material.color;
+        c.a = 0.1f;
+        renderer.material.color = c;
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    IEnumerator FadeIn()
+    {
+        Color c = renderer.material.color;
+        c.a = 0.8f;
+        renderer.material.color = c;
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    int count = 0;
+
+    IEnumerator BatMoving()  // 박쥐 몬스터의 일상 움직임
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.3f);  // 초마다 계속 움직이기
+
+            nextMoveX = Random.Range(-1, 2);  // 좌우 다음에 어디로 이동할지 결정
+            nextMoveY = Random.Range(-1, 2);  // 상하 다음에 어디로 이동할지 결정
+            rigid.velocity = new Vector2(nextMoveX * 100, nextMoveY * 100);
+        }
     }
 }
