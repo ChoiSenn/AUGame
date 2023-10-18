@@ -113,8 +113,8 @@ public class PlayerMoving : MonoBehaviour
                 animator.SetBool("Jumping", true);  // 점프 모션
             }
 
-            if (Input.GetMouseButtonDown(0) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !MagicScrollCanvasFlag)
-            { // 좌클릭이 눌렸고 Attack 애니메이션이 실행되고 있지 않다면
+            if (Input.GetMouseButtonDown(0) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !MagicScrollCanvasFlag && Time.timeScale == 1f)
+            { // 좌클릭이 눌렸고 Attack 애니메이션이 실행되고 있지 않고 마법서가 닫혀있고 시간이 정상적으로 흐르고 있으면 (시간만 세팅하고 마법서 검증은 빼도 될듯)
                 animator.SetTrigger("Attack");  // Attack 트리거를 설정하여 공격 모션
 
                 Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);  // 충돌 검사
