@@ -111,10 +111,6 @@ public class MagicScrollScript2 : MonoBehaviour
     {
         if (Count >= 0)
         {
-            Debug.Log("블럭 한 줄 출력 : " + Count);
-            //var explo = Instantiate(explosion, Bar.transform.position, Quaternion.identity);
-            //Destroy(explo, 0.5f);
-
             int blockX = 1866;
 
             for (int i = 0; i < Count; i++)
