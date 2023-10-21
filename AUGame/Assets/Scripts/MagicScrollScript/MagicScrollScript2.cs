@@ -84,7 +84,7 @@ public class MagicScrollScript2 : MonoBehaviour
             hint = "hint 1. 벽돌을 계단 형식으로 쌓으려면 어떤 코드를 작성해야 할지 생각해보자.";
             HintText.text = hint;
         }
-        else if (failCount == 2)
+        else if (failCount >= 2)
         {
             hint = "hint 1. 벽돌을 계단 형식으로 쌓으려면 어떤 코드를 작성해야 할지 생각해보자.\nhint.2 첫 번째 칸은 공백을 출력하는 반복문이고, 두 번째 칸은 벽돌을 출력하는 반복문임에 주목하자.";
             HintText.text = hint;

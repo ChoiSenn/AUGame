@@ -23,6 +23,9 @@ public class PlayerHelp : MonoBehaviour
 
     void Start()
     {
+        helpActive = true;
+        Time.timeScale = 1f;
+
         helpPanel.SetActive(true);
         helpActive = true;
         Time.timeScale = 0f;
