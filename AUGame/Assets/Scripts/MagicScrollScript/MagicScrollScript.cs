@@ -124,7 +124,8 @@ public class MagicScrollScript : MonoBehaviour
 
     void BarMovingFunc()
     {
-        BarMoving(Bar_Y_Position);  // 바 움직임
+        //BarMoving(Bar_Y_Position);  // 바 움직임
+        BarDown(Bar_Y_Position);
     }
 
     public GameObject explosion;
@@ -138,6 +139,15 @@ public class MagicScrollScript : MonoBehaviour
         Vector3 destination = new Vector3(Bar.transform.position.x, -(160000 * bar_Y_Position), 0);
         Vector3 speed = Vector3.zero; // (0,0,0) 은 .zero 로도 표현가능
         Bar.transform.position = Vector3.SmoothDamp(Bar.transform.position, destination, ref speed, 0.1f);
+    }
+
+    void BarDown(int bar_Y_Position)
+    {
+        var explo = Instantiate(explosion, Bar.transform.position, Quaternion.identity);
+        Destroy(explo, 0.5f);
+
+        Vector3 destination = new Vector3(1251, 55 - (bar_Y_Position * 10), 0);
+        Bar.transform.position = destination;
     }
 
     public void ResetButton()
