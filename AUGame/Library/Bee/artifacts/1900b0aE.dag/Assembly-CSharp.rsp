@@ -390,6 +390,7 @@
 "Assets/Scripts/PlayerScript/MagicAttack.cs"
 "Assets/Scripts/PlayerScript/Player Inventory.cs"
 "Assets/Scripts/PlayerScript/PlayerHelp.cs"
+"Assets/Scripts/PlayerScript/PlayerHelpTheory1.cs"
 "Assets/Scripts/PlayerScript/PlayerMoving.cs"
 "Assets/Scripts/SceneScript/StageClear.cs"
 "Assets/Scripts/SceneScript/StageMoving.cs"

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 478
+  controlID: 112
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 427
+  controlID: 40
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 428
+  controlID: 41
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -646,9 +646,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.1851246, y: 0.2841005, z: 7.6645412}
+    m_Target: {x: 223.64264, y: 411.58777, z: 15.685829}
     speed: 2
-    m_Value: {x: 0.1851246, y: 0.2841005, z: 7.6645412}
+    m_Value: {x: 223.64264, y: 411.58777, z: 15.685829}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -698,9 +698,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 4.368444
+    m_Target: 717.41534
     speed: 2
-    m_Value: 4.368444
+    m_Value: 717.41534
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -762,9 +762,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 6061ffffa661ffffce63ffffd663ffffbc66ffffc6ccffff0ccdffff34cfffff3ccfffff1afbffff586c00006a6c0000cc6c0000606d0000d46d00008c6f00001c7000006cb8000076b80000b6b800000ab900001abb0000c6bb0000
+      m_SelectedIDs: d257ffff
+      m_LastClickedID: -43054
+      m_ExpandedIDs: 5258ffff6458ffffc45bffff305effffce61ffff866bffffb46dffffc070ffffe470ffff2273ffff8c7affff1e7bffff287bffff307bffff307cffff4e7fffff0a88ffffb689ffff6a91fffffe92ffff16b4ffffaab6ffff3cbbffff5ebcffffecbcffff4ebeffffdebefffffebfffff84c0ffffb0c1fffffec4ffff20c6ffff8cc7ffffaec8ffff30c9ffff52caffffd4caffff26ccffff0ecdffff2eceffffaeceffffcecfffff4ed0ffff6ed1ffff7ad3ffff26d9ffff52daffffc6dfffff5ee0ffffc8e0ffffc6e1ffffd0e9ffffe0eaffff7eecffff0cf8ffff1afbffffa67800002279000036a60000baa600003caa0000fcd80000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -933,7 +933,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/PlayerScript
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -941,16 +941,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/PlayerScript
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Work\AU_Game\AUGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 120}
-    m_SelectedIDs: c8660000
-    m_LastClickedID: 26312
-    m_ExpandedIDs: 00000000a2660000a4660000a6660000a8660000aa660000ac660000ae660000b066000000ca9a3b
+    scrollPos: {x: 0, y: 122}
+    m_SelectedIDs: 7e620000
+    m_LastClickedID: 25214
+    m_ExpandedIDs: 00000000486200004a6200004c6200004e62000052620000546200005662000072620000a4620000a6620000a8620000aa62000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -978,7 +978,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a2660000a4660000a6660000a8660000aa660000ac660000ae660000b066000000ca9a3b
+    m_ExpandedIDs: 00000000486200004a6200004c6200004e62000050620000526200005462000056620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1006,7 +1006,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300000000000092720000
+    m_ExpandedInstanceIDs: c62300000000000092720000c0610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

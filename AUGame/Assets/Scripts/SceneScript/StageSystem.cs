@@ -11,7 +11,6 @@ public class StageSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        T1s.SetActive(false);
         S1s.SetActive(false);
     }
 

@@ -28,9 +28,16 @@ public class StageMoving : MonoBehaviour
 
             if (hit.collider != null)
             {
+                Debug.Log(hit.collider.name);
+
                 if (hit.collider.name == "Coding1StageOn")
                 {
                     SceneManager.LoadScene("Coding1Stage");
+                }
+
+                if (hit.collider.name == "Theory1StageOn")
+                {
+                    SceneManager.LoadScene("Theory1Stage");
                 }
 
             }
