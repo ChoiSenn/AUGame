@@ -62,6 +62,13 @@ public class Enemy : MonoBehaviour
 
             StartCoroutine("BatMoving");  // 박쥐 움직임 반복
         }
+        else if (name.Equals("BigBat"))  // 큰 보스 박쥐의 경우, 스텟 생성
+        {
+            hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
+            SetEnemyStatus("BigBat", 1000, 10, 1.5f, 100, 1.5f, 400f);
+            nowHpbar = hpBar.transform.GetChild(0).GetComponent<Image>();
+            // 거대 박쥐 움직임은 따로 스크립트 작성. 나중에 일반 박쥐도 스크립트 분리할것.
+        }
 
         SetAttackSpeed(atkSpeed);
     }
@@ -77,6 +84,11 @@ public class Enemy : MonoBehaviour
             nowHpbar.fillAmount = (float)nowHp / (float)maxHp;
         }
 
+        if (name.Equals("BigBat"))
+        {
+            nowHpbar.fillAmount = (float)nowHp / (float)maxHp;
+        }
+
         Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);  // 플레이어의 공격이 닿는지 검사
         foreach (Collider2D collider in collider2DsPlayer)
         {
@@ -84,7 +96,7 @@ public class Enemy : MonoBehaviour
             {
                 if (player.attacked)  // 플레이어가 공격 상태면
                 {
-                    if (name.Equals("Slime"))
+                    if (name.Equals("Slime") || name.Equals("BigBat"))
                     {
                         nowHp -= 10;  // 데미지 받고
                         player.attacked = false;
@@ -112,7 +124,7 @@ public class Enemy : MonoBehaviour
         {  // 마법 발사체에 맞으면
             Destroy(col.gameObject);  // 맞은 발사체 제거
 
-            if (name.Equals("Slime"))
+            if (name.Equals("Slime") || name.Equals("BigBat"))
             {
                 nowHp -= 30;
                 if (nowHp <= 0) // 적 사망

@@ -21,8 +21,6 @@ public class UIInventoryClick : MonoBehaviour
     Image slotImage2;
     Image slotImage3;
 
-    public string a = "hello";
-
     public string nowMagic = "";
 
     void Start()
@@ -36,6 +34,8 @@ public class UIInventoryClick : MonoBehaviour
     public void OnPointerClick(PointerEventData eventData)  // UI 인벤토리 클릭 시
     {
         GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;  // 클릭 된 마법 UI 부분 확인
+
+        Debug.Log(clickedObject);
 
         if (eventData.button == PointerEventData.InputButton.Right)  // 우클릭이면 마법 사용
         {
