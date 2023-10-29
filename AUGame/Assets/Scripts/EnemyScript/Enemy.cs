@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         else if (name.Equals("BigBat"))  // 큰 보스 박쥐의 경우, 스텟 생성
         {
             hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
-            SetEnemyStatus("BigBat", 1000, 10, 1.5f, 100, 1.5f, 400f);
+            SetEnemyStatus("BigBat", 1000, 10, 1.5f, 1000000, 1.5f, 400f);
             nowHpbar = hpBar.transform.GetChild(0).GetComponent<Image>();
             // 거대 박쥐 움직임은 따로 스크립트 작성. 나중에 일반 박쥐도 스크립트 분리할것.
         }
