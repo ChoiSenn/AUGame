@@ -10,13 +10,20 @@ public class BigBatAI : MonoBehaviour
     Animator enemyAnimator;
     Rigidbody2D rigid;
 
+    [SerializeField]
+    private GameObject bulletSmall;  // 공격할 때 생성되는 발사체 프리팹
+    [SerializeField]
+    private GameObject bulletMedium;
+    [SerializeField]
+    private GameObject bulletLarge;
+
     void Start()
     {
         enemy = GetComponent<Enemy>();
         enemyAnimator = enemy.enemyAnimator;
         rigid = GetComponent<Rigidbody2D>();
 
-        StartCoroutine("Pattern1");
+        StartCoroutine("Bullet1Pattern");  // 코루틴 시작
     }
 
     // Update is called once per frame
@@ -25,30 +32,28 @@ public class BigBatAI : MonoBehaviour
         
     }
 
-    IEnumerator Pattern1()
+    IEnumerator MoveLeftPattern()  // 왼쪽으로 천천히 이동
     {
-        yield return new WaitForSeconds(0.5f);
-
         transform.localScale = new Vector3(200, 200, 1);
-        rigid.velocity = new Vector2(-1 * 100, 0 * 100);
+        rigid.velocity = new Vector2(-1 * 200, 0 * 200);
 
-        StartCoroutine("Pattern2");
-    }
-
-    IEnumerator Pattern2()
-    {
         yield return new WaitForSeconds(3.0f);
 
+        StartCoroutine("PrepareRightPattern");
+    }
+
+    IEnumerator MoveRightPattern()  // 오른쪽으로 천천히 이동
+    {
         transform.localScale = new Vector3(-200, 200, 1);
         rigid.velocity = new Vector2(1 * 100, 0 * 100);
 
-        StartCoroutine("Pattern3");
-    }
-
-    IEnumerator Pattern3()
-    {
         yield return new WaitForSeconds(3.0f);
 
+        StartCoroutine("MoveLeftPattern");
+    }
+
+    IEnumerator PrepareLeftPattern()  // 돌진 전 준비
+    {
         transform.localScale = new Vector3(200, 200, 1);
         rigid.velocity = new Vector2(1 * 100, 1 * 100);
 
@@ -67,7 +72,28 @@ public class BigBatAI : MonoBehaviour
         StartCoroutine("Pattern4");
     }
 
-    IEnumerator Pattern4()
+    IEnumerator PrepareRightPattern()  // 돌진 전 준비
+    {
+
+        transform.localScale = new Vector3(-200, 200, 1);
+        rigid.velocity = new Vector2(-1 * 100, 1 * 100);
+
+        yield return new WaitForSeconds(0.3f);
+
+        rigid.velocity = new Vector2(1 * 100, -1 * 100);
+
+        yield return new WaitForSeconds(0.3f);
+
+        rigid.velocity = new Vector2(-1 * 100, 1 * 100);
+
+        yield return new WaitForSeconds(0.3f);
+
+        rigid.velocity = new Vector2(1 * 100, -1 * 100);
+
+        StartCoroutine("RushRightPattern");
+    }
+
+    IEnumerator RushLeftPattern()  // 왼쪽으로 돌진
     {
         yield return new WaitForSeconds(0.3f);
 
@@ -76,57 +102,134 @@ public class BigBatAI : MonoBehaviour
 
         StartCoroutine("Pattern6");
     }
-
-    IEnumerator Pattern5()
+    IEnumerator RushRightPattern()  // 오른쪽으로 돌진
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.3f);
 
         transform.localScale = new Vector3(-200, 200, 1);
-        // 탄막 발사
+        rigid.velocity = new Vector2(1 * 500, 0 * 500);
 
-        //StartCoroutine("Pattern1");
+        yield return new WaitForSeconds(3.0f);
+
+        StartCoroutine("SwingLeftPattern");
     }
 
-    IEnumerator Pattern6()
+    IEnumerator SwingLeftPattern()  // 왼쪽 포물선 돌진
     {
-        yield return new WaitForSeconds(1.0f);
+        transform.localScale = new Vector3(200, 200, 1);
+
+        rigid.velocity = new Vector2(-1 * 500, -0.8f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, -0.7f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, -0.6f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, -0.5f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, -0.4f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, -0.3f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, -0.2f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, -0.1f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, 0.1f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, 0.2f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, 0.3f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, 0.4f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, 0.5f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, 0.6f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, 0.7f * 500);
+        yield return new WaitForSeconds(0.1f);
+        rigid.velocity = new Vector2(-1 * 500, 0.8f * 500);
+        yield return new WaitForSeconds(0.1f);
+
+        rigid.velocity = new Vector2(1 * 0, 1 * 0);
+        StartCoroutine("SwingRightPattern");
+    }
+
+    IEnumerator SwingRightPattern()  // 오른쪽 포물선 돌진
+    {
 
         transform.localScale = new Vector3(-200, 200, 1);
 
-        rigid.velocity = new Vector2(1 * 200, -0.8f * 300);
+        rigid.velocity = new Vector2(1 * 500, -0.8f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, -0.7f * 300);
+        rigid.velocity = new Vector2(1 * 500, -0.7f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, -0.6f * 300);
+        rigid.velocity = new Vector2(1 * 500, -0.6f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, -0.5f * 300);
+        rigid.velocity = new Vector2(1 * 500, -0.5f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, -0.4f * 300);
+        rigid.velocity = new Vector2(1 * 500, -0.4f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, -0.3f * 300);
+        rigid.velocity = new Vector2(1 * 500, -0.3f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, -0.2f * 300);
+        rigid.velocity = new Vector2(1 * 500, -0.2f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, -0.1f * 300);
+        rigid.velocity = new Vector2(1 * 500, -0.1f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, 0.1f * 300);
+        rigid.velocity = new Vector2(1 * 500, 0.1f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, 0.2f * 300);
+        rigid.velocity = new Vector2(1 * 500, 0.2f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, 0.3f * 300);
+        rigid.velocity = new Vector2(1 * 500, 0.3f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, 0.4f * 300);
+        rigid.velocity = new Vector2(1 * 500, 0.4f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, 0.5f * 300);
+        rigid.velocity = new Vector2(1 * 500, 0.5f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, 0.6f * 300);
+        rigid.velocity = new Vector2(1 * 500, 0.6f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, 0.7f * 300);
+        rigid.velocity = new Vector2(1 * 500, 0.7f * 500);
         yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 200, 0.8f * 300);
+        rigid.velocity = new Vector2(1 * 500, 0.8f * 500);
         yield return new WaitForSeconds(0.1f);
 
-        //StartCoroutine("Pattern6");
+        rigid.velocity = new Vector2(1 * 0, 1 * 0);
+        StartCoroutine("Bullet2Pattern");
+    }
+
+    IEnumerator Bullet1Pattern()  // 탄막 발사 패턴 1
+    {
+        rigid.velocity = new Vector2(1 * 0, 1 * 0);
+        yield return new WaitForSeconds(1.0f);
+
+        transform.localScale = new Vector3(200, 200, 1);
+
+        float attackRate = 1.0f;  // 공격 주기
+        int bulletCount = 10;  // 발사체 생성 개수
+        float intervalAngle = 360 / bulletCount;  // 발사체 사이의 각도
+        float weightAngle = 0;  // 가중되는 각도 (항상 같은 위치로 발사하지 않도록 설정)
+
+        int count = 0;
+
+        while (count < 5)  // 5번 동안 count 개수만큼 원 형태로 방사하는 발사체 생성
+        {
+            for (int i = 0; i < bulletCount; ++i)
+            {
+                GameObject clone = Instantiate(bulletSmall, transform.position, Quaternion.identity);  // 발사체 생성
+                float angle = weightAngle + intervalAngle * i;  // 발사체 이동 방향(각도)
+                float x = Mathf.Cos(angle * Mathf.PI / 180.0f);  // Cos(각도), 라디안 각도의 각도 표현을 위해 PI / 180을 곱함
+                float y = Mathf.Sin(angle * Mathf.PI / 180.0f);  // Sin(각도), 라디안 각도의 각도 표현을 위해 PI / 180을 곱함
+                clone.GetComponent<Movement2D>().MoveTo(new Vector2(x, y));  // 발사체 이동 방향 결정
+            }
+
+            weightAngle += 5;  // 발사체가 생성되는 시작 각도 설정을 위한 변수
+
+            count++;
+            yield return new WaitForSeconds(attackRate);  // attackRate 시간 만큼 대기
+        }
+
+
+        StartCoroutine("MoveLeftPattern");
     }
 
 }

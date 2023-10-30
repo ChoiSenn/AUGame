@@ -11,6 +11,7 @@ TagManager:
   - BlindInput
   - MagicCircle2
   - CreateBlock
+  - EnemyShot
   layers:
   - Default
   - TransparentFX

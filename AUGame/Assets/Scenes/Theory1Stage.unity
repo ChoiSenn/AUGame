@@ -6164,7 +6164,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1148993942}
-  p: []
+  bulletSmall: {fileID: 5146110765348822339, guid: 4db6b9c7841321d45b19ce1d41a292ed, type: 3}
+  bulletMedium: {fileID: 5072975199298685946, guid: d08aeb4d3c5d2654db87072c4f0515d4, type: 3}
+  bulletLarge: {fileID: 6353948289919622622, guid: c4ea4350d9955ac4aa452fee1adccb86, type: 3}
 --- !u!95 &1996116797 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5567075257899611695, guid: 3931693c50234e14c995745af9ec0f06, type: 3}
