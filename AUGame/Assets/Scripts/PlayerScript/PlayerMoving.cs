@@ -127,7 +127,7 @@ public class PlayerMoving : MonoBehaviour
             Collider2D[] collider2DsPlayer = Physics2D.OverlapBoxAll(posPlayer.position, boxSize, 0);  // 닿는 충돌 검사
             foreach (Collider2D collider in collider2DsPlayer)
             {
-                if (collider.tag == "Enemy")
+                if (collider.tag == "Enemy" || collider.tag == "EnemyShot")
                 {
                     Die();
                 }
