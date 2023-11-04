@@ -8,7 +8,7 @@ public class T1StageEvent : MonoBehaviour
 
     void Start()
     {
-        MagicCircle.SetActive(false);
+        //MagicCircle.SetActive(false);
     }
 
     void Update()

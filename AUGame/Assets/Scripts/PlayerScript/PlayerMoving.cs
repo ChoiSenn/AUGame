@@ -31,6 +31,7 @@ public class PlayerMoving : MonoBehaviour
     public GameObject MagicScrollCanvas;  // 마법서 UI
     public bool MagicScrollCanvasFlag = false;
     public GameObject MagicScrollCanvas2;  // 마법서2 UI
+    public GameObject MagicScrollT1;
 
     void Start()
     {
@@ -40,7 +41,8 @@ public class PlayerMoving : MonoBehaviour
 
         MagicScrollCanvas.SetActive(false);
         MagicScrollCanvas2.SetActive(false);
-    }
+        MagicScrollT1.SetActive(false);
+}
 
     void Update()
     {
@@ -167,6 +169,26 @@ public class PlayerMoving : MonoBehaviour
                             Debug.Log("마법서 닫힘");
                             MagicScrollCanvasFlag = false;
                             MagicScrollCanvas2.SetActive(false);  // 닫음
+                            Time.timeScale = 1f;
+                        }
+                    }
+                }
+                else if (collider.tag == "MagicCircleT1")  // 마법진2에 닿고
+                {
+                    if (Input.GetKeyDown(KeyCode.Q)) // Q를 눌렀을 때
+                    {
+                        if (!MagicScrollCanvasFlag)  // 마법스크롤이 안 열려있으면
+                        {
+                            Debug.Log("마법서 열림");
+                            MagicScrollCanvasFlag = true;
+                            MagicScrollT1.SetActive(true);  // 열고
+                            Time.timeScale = 0f;
+                        }
+                        else  // 열려있으면
+                        {
+                            Debug.Log("마법서 닫힘");
+                            MagicScrollCanvasFlag = false;
+                            MagicScrollT1.SetActive(false);  // 닫음
                             Time.timeScale = 1f;
                         }
                     }
