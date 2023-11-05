@@ -380,6 +380,7 @@
 "Assets/Scripts/EnemyScript/Movement2D.cs"
 "Assets/Scripts/ETCScript/CameraFollow.cs"
 "Assets/Scripts/ETCScript/T1StageEvent.cs"
+"Assets/Scripts/ETCScript/Theory1EKey.cs"
 "Assets/Scripts/InventoryScript/Inventory.cs"
 "Assets/Scripts/InventoryScript/IObjectItem.cs"
 "Assets/Scripts/InventoryScript/Item.cs"
