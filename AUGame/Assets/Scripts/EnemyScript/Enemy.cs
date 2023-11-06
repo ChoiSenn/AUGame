@@ -45,6 +45,8 @@ public class Enemy : MonoBehaviour
     public int nextMoveX;  //다음 행동지표를 결정할 변수
     public int nextMoveY;
 
+    BigBatAI BigBatAI;
+
     void Start()
     {
         renderer = targetEnemy.GetComponent<Renderer>();
@@ -170,32 +172,40 @@ public class Enemy : MonoBehaviour
         Color c = renderer.material.color;
         c.a = 0.5f;
 
-        if (name.Equals("Slime"))
+        if (name.Equals("BigBat"))
         {
-            renderer.material.color = c;
-            enemyAnimator.SetTrigger("Die");            // die 애니메이션 실행
-            GetComponent<EnemySlimeAI>().enabled = false;    // 추적 비활성화
+            //BigBatAI.Groggy();
+            //nowHp = 1000;
         }
         else
         {
-            StopCoroutine("BatMoving");
-            var explo = Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(explo, 0.5f);
-            StartCoroutine("FadeOut");
-            StartCoroutine("FadeIn");
-            StartCoroutine("FadeOut");
-            StartCoroutine("FadeIn");
-            renderer.material.color = c;
-        }
-        //Debug.Log("Slime Dying!!");
-        
-        GetComponent<Collider2D>().enabled = false; // 충돌체 비활성화
-        Destroy(GetComponent<Rigidbody2D>());       // 중력 비활성화
+            if (name.Equals("Slime"))
+            {
+                renderer.material.color = c;
+                enemyAnimator.SetTrigger("Die");            // die 애니메이션 실행
+                GetComponent<EnemySlimeAI>().enabled = false;    // 추적 비활성화
+            }
+            else
+            {
+                StopCoroutine("BatMoving");
+                var explo = Instantiate(explosion, transform.position, Quaternion.identity);
+                Destroy(explo, 0.5f);
+                StartCoroutine("FadeOut");
+                StartCoroutine("FadeIn");
+                StartCoroutine("FadeOut");
+                StartCoroutine("FadeIn");
+                renderer.material.color = c;
+            }
+            //Debug.Log("Slime Dying!!");
 
-        Destroy(gameObject, 0.5f);                     // 0.5초후 제거
-        if (name.Equals("Slime"))
-        {
-            Destroy(hpBar.gameObject, 0.5f);               // 1초후 체력바 제거
+            GetComponent<Collider2D>().enabled = false; // 충돌체 비활성화
+            Destroy(GetComponent<Rigidbody2D>());       // 중력 비활성화
+
+            Destroy(gameObject, 0.5f);                     // 0.5초후 제거
+            if (name.Equals("Slime"))
+            {
+                Destroy(hpBar.gameObject, 0.5f);               // 1초후 체력바 제거
+            }
         }
     }
 

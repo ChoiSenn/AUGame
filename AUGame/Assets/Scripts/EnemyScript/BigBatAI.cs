@@ -5,6 +5,7 @@ using UnityEngine;
 public class BigBatAI : MonoBehaviour
 {
     public Transform target;
+    public GameObject targetEnemy;
 
     Enemy enemy;
     Animator enemyAnimator;
@@ -17,11 +18,14 @@ public class BigBatAI : MonoBehaviour
     [SerializeField]
     private GameObject bulletLarge;
 
+    Renderer renderer;
+
     void Start()
     {
         enemy = GetComponent<Enemy>();
         enemyAnimator = enemy.enemyAnimator;
         rigid = GetComponent<Rigidbody2D>();
+        renderer = targetEnemy.GetComponent<Renderer>();
 
         StartCoroutine("Bullet1Pattern");  // 코루틴 시작
     }
@@ -29,7 +33,52 @@ public class BigBatAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(enemy.nowHp < 0)
+        {
+            rigid.velocity = new Vector2(0 * 100, 0 * 100);
+
+            StopCoroutine("MoveLeftPattern");
+            StopCoroutine("MoveRightPattern");
+            StopCoroutine("PrepareLeftPattern");
+            StopCoroutine("PrepareRightPattern");
+            StopCoroutine("RushLeftPattern");
+            StopCoroutine("RushRightPattern");
+            StopCoroutine("SwingLeftPattern");
+            StopCoroutine("SwingRightPattern");
+            StopCoroutine("Bullet1Pattern");
+            StopCoroutine("MoveDownPattern");
+            StopCoroutine("Bullet2Pattern");
+            StopCoroutine("BatMoving");
+
+            groggyPrepare();
+        }
+    }
+
+    void groggyPrepare()
+    {
+        StartCoroutine("Groggy");
+    }
+
+    public IEnumerator Groggy()  // 체력이 다 닳으면 그로기 상태
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        enemy.nowHp = 1000;
+
+        StopCoroutine("MoveLeftPattern");
+        StopCoroutine("MoveRightPattern");
+        StopCoroutine("PrepareLeftPattern");
+        StopCoroutine("PrepareRightPattern");
+        StopCoroutine("RushLeftPattern");
+        StopCoroutine("RushRightPattern");
+        StopCoroutine("SwingLeftPattern");
+        StopCoroutine("SwingRightPattern");
+        StopCoroutine("Bullet1Pattern");
+        StopCoroutine("MoveDownPattern");
+        StopCoroutine("Bullet2Pattern");
+        StopCoroutine("BatMoving");
+
+        StartCoroutine("Bullet1Pattern");
     }
 
     IEnumerator MoveLeftPattern()  // 왼쪽으로 천천히 이동
