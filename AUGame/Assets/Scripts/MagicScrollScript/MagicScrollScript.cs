@@ -21,12 +21,13 @@ public class MagicScrollScript : MonoBehaviour
     public PlayerMoving playerMoving;
 
     public int Bar_Y_Position = 0;
+    Rigidbody2D rigid;
 
     public int failCount = 0;
 
     void Start()
     {
-        //Time.timeScale = 0f;  // 시작 시 멈추게. 이건 Player Moving에서 적용
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -114,6 +115,7 @@ public class MagicScrollScript : MonoBehaviour
             playerMoving.MagicScrollCanvasFlag = false;
 
             Invoke("BarMovingFunc", 1);
+            //BarMoving(Bar_Y_Position);
         }
         else
         {
@@ -124,7 +126,6 @@ public class MagicScrollScript : MonoBehaviour
 
     void BarMovingFunc()
     {
-        //BarMoving(Bar_Y_Position);  // 바 움직임
         BarDown(Bar_Y_Position);
     }
 
@@ -132,13 +133,18 @@ public class MagicScrollScript : MonoBehaviour
 
     void BarMoving(int bar_Y_Position)
     {
-        //Debug.Log("실행 : " + bar_Y_Position);
-        var explo = Instantiate(explosion, Bar.transform.position, Quaternion.identity);
-        Destroy(explo, 0.5f);
+        StartCoroutine(BarMove(bar_Y_Position));
+    }
 
-        Vector3 destination = new Vector3(Bar.transform.position.x, -(160000 * bar_Y_Position), 0);
-        Vector3 speed = Vector3.zero; // (0,0,0) 은 .zero 로도 표현가능
-        Bar.transform.position = Vector3.SmoothDamp(Bar.transform.position, destination, ref speed, 0.1f);
+    IEnumerator BarMove(float bar_Y_Position)
+    {
+        transform.localScale = new Vector3(200, 200, 1);
+        rigid.velocity = new Vector2(0 * 500, -1 * 200);
+
+        yield return new WaitForSeconds(bar_Y_Position);
+
+        rigid.velocity = new Vector2(1 * 0, 1 * 0);
+        yield return new WaitForSeconds(1.5f);
     }
 
     void BarDown(int bar_Y_Position)

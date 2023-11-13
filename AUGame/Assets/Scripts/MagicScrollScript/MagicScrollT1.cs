@@ -20,8 +20,10 @@ public class MagicScrollT1 : MonoBehaviour
     public GameObject Block5;
 
     public PlayerMoving playerMoving;
-
     public int failCount = 0;
+
+    public AudioSource audioSource;
+    public AudioClip doorOpen;
 
     void Start()
     {
@@ -86,6 +88,7 @@ public class MagicScrollT1 : MonoBehaviour
         Time.timeScale = 1f;  // 시간 흐르게 만들고
         MagicScrollCanvas.SetActive(false);  // 마법스크롤 창 닫고
         playerMoving.MagicScrollCanvasFlag = false;
+        audioSource.PlayOneShot(doorOpen);
 
         var explo = Instantiate(explosion, Block.transform.position, Quaternion.identity);
         var explo2 = Instantiate(explosion, Block2.transform.position, Quaternion.identity);

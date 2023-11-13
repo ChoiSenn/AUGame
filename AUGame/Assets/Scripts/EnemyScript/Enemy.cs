@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     public float atkRange;
     public float fieldOfVision;
 
+    public AudioSource audioSource;
+    public AudioClip enemyDied;
+
     private void SetEnemyStatus(string _enemyName, int _maxHp, int _atkDmg, float _atkSpeed, float _moveSpeed, float _atkRange, float _fieldOfVision)
     {
         enemyName = _enemyName;
@@ -181,12 +184,14 @@ public class Enemy : MonoBehaviour
         {
             if (name.Equals("Slime"))
             {
+                audioSource.PlayOneShot(enemyDied);
                 renderer.material.color = c;
                 enemyAnimator.SetTrigger("Die");            // die 애니메이션 실행
                 GetComponent<EnemySlimeAI>().enabled = false;    // 추적 비활성화
             }
             else
             {
+                audioSource.PlayOneShot(enemyDied);
                 StopCoroutine("BatMoving");
                 var explo = Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(explo, 0.5f);

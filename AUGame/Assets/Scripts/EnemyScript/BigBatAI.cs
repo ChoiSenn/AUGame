@@ -20,6 +20,11 @@ public class BigBatAI : MonoBehaviour
 
     Renderer renderer;
 
+    public AudioSource audioSource;
+    public AudioClip batShot;
+    public AudioClip batAttack1;
+    public AudioClip batAttack2;
+
     void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -36,7 +41,7 @@ public class BigBatAI : MonoBehaviour
         if(enemy.nowHp < 0)
         {
             rigid.velocity = new Vector2(0 * 100, 0 * 100);
-
+            
             StopCoroutine("MoveLeftPattern");
             StopCoroutine("MoveRightPattern");
             StopCoroutine("PrepareLeftPattern");
@@ -144,6 +149,7 @@ public class BigBatAI : MonoBehaviour
 
     IEnumerator RushLeftPattern()  // 왼쪽으로 돌진
     {
+        audioSource.PlayOneShot(batAttack1);
         yield return new WaitForSeconds(0.3f);
 
         transform.localScale = new Vector3(200, 200, 1);
@@ -155,6 +161,7 @@ public class BigBatAI : MonoBehaviour
     }
     IEnumerator RushRightPattern()  // 오른쪽으로 돌진
     {
+        audioSource.PlayOneShot(batAttack1);
         yield return new WaitForSeconds(0.3f);
 
         transform.localScale = new Vector3(-200, 200, 1);
@@ -171,40 +178,14 @@ public class BigBatAI : MonoBehaviour
 
     IEnumerator SwingLeftPattern()  // 왼쪽 포물선 돌진
     {
+        audioSource.PlayOneShot(batAttack2);
         transform.localScale = new Vector3(200, 200, 1);
 
-        rigid.velocity = new Vector2(-1 * 500, -0.8f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, -0.7f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, -0.6f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, -0.5f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, -0.4f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, -0.3f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, -0.2f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, -0.1f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, 0.1f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, 0.2f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, 0.3f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, 0.4f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, 0.5f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, 0.6f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, 0.7f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(-1 * 500, 0.8f * 500);
-        yield return new WaitForSeconds(0.1f);
+        for (float i = -0.8f; i <= 0.8f; i += 0.1f)
+        {
+            rigid.velocity = new Vector2(-1 * 500, i * 500);
+            yield return new WaitForSeconds(0.1f);
+        }
 
         transform.localScale = new Vector3(-200, 200, 1);
         rigid.velocity = new Vector2(1 * 0, 1 * 0);
@@ -214,41 +195,14 @@ public class BigBatAI : MonoBehaviour
 
     IEnumerator SwingRightPattern()  // 오른쪽 포물선 돌진
     {
-
+        audioSource.PlayOneShot(batAttack2);
         transform.localScale = new Vector3(-200, 200, 1);
 
-        rigid.velocity = new Vector2(1 * 500, -0.8f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, -0.7f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, -0.6f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, -0.5f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, -0.4f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, -0.3f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, -0.2f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, -0.1f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, 0.1f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, 0.2f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, 0.3f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, 0.4f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, 0.5f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, 0.6f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, 0.7f * 500);
-        yield return new WaitForSeconds(0.1f);
-        rigid.velocity = new Vector2(1 * 500, 0.8f * 500);
-        yield return new WaitForSeconds(0.1f);
+        for (float i = -0.8f; i <= 0.8f; i += 0.1f)
+        {
+            rigid.velocity = new Vector2(1 * 500, i * 500);
+            yield return new WaitForSeconds(0.1f);
+        }
 
         transform.localScale = new Vector3(200, 200, 1);
         rigid.velocity = new Vector2(1 * 0, 1 * 0);
@@ -272,6 +226,7 @@ public class BigBatAI : MonoBehaviour
 
         while (count < 5)  // 5번 동안 count 개수만큼 원 형태로 방사하는 발사체 생성
         {
+            audioSource.PlayOneShot(batShot);
             for (int i = 0; i < bulletCount; ++i)
             {
                 GameObject clone = Instantiate(bulletSmall, transform.position, Quaternion.identity);  // 발사체 생성
@@ -324,6 +279,7 @@ public class BigBatAI : MonoBehaviour
 
         while (count < 10)  // 10번 동안 count 개수만큼 원 형태로 방사하는 발사체 생성
         {
+            audioSource.PlayOneShot(batShot);
             for (int i = 0; i < AbulletCount; ++i)
             {
                 GameObject clone = Instantiate(bulletMedium, transform.position, Quaternion.identity);  // 발사체 생성

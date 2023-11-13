@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-
     [Header("인벤토리")]
     public Inventory inventory;
+
+    public AudioSource audioSource;
+    public AudioClip GetSound;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,7 @@ public class PlayerInventory : MonoBehaviour
             Item item = clickInterface.ClickItem(); // item에 클릭된 오브젝트의 아이템 정보를 넘김
             Debug.Log($"{item.itemName}");
             inventory.AddItem(item);
+            audioSource.PlayOneShot(GetSound);
         }
     }
 }

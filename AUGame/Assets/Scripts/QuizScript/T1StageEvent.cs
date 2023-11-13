@@ -31,6 +31,10 @@ public class T1StageEvent : MonoBehaviour
     public Transform posPlayer;
     public Vector2 boxSize;
 
+    public AudioSource audioSource; 
+    public AudioClip RightSound; 
+    public AudioClip WrongSound;
+
     void Start()
     {
         MagicCircle.SetActive(false);
@@ -69,7 +73,7 @@ public class T1StageEvent : MonoBehaviour
 
     int loopNum = 0;
 
-    string CSVRandomQuiz()
+    string CSVRandomQuiz()  // CSV 읽어온 문제 리스트에서 문제 랜덤 뽑아오기
     {
         while (true)
         {
@@ -175,6 +179,7 @@ public class T1StageEvent : MonoBehaviour
             {
                 userLevel += 1;
             }
+            audioSource.PlayOneShot(RightSound);
             SetScore();
             Quiz();
         }
@@ -185,6 +190,7 @@ public class T1StageEvent : MonoBehaviour
             {
                 userLevel -= 1;
             }
+            audioSource.PlayOneShot(WrongSound);
             SetScore();
         }
     }

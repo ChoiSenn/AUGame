@@ -11,6 +11,9 @@ public class MagicAttack : MonoBehaviour
     public float cooltime;
     private float curtime;
 
+    public AudioSource audioSource;
+    public AudioClip MasicSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class MagicAttack : MonoBehaviour
                 if(player.magic == "Fire Item")  // 현재 마법 여부에 따라 공격이 바뀜
                 {
                     Instantiate(fire, pos.position, transform.rotation); // 받아온 불 이미지 발사
+                    audioSource.PlayOneShot(MasicSound);
                 }
                 else
                 {

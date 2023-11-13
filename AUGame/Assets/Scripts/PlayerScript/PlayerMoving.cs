@@ -33,6 +33,13 @@ public class PlayerMoving : MonoBehaviour
     public GameObject MagicScrollCanvas2;  // 마법서2 UI
     public GameObject MagicScrollT1;
 
+    public AudioSource audioSource; // AudioSource 컴포넌트
+    public AudioClip jumpSound; // 점프 효과음 AudioClip
+    public AudioClip AttackSound; // 근접 공격 효과음
+    public AudioClip OScrollSound; // 마법서 여는 효과음
+    public AudioClip CScrollSound; // 마법서 닫는 효과음
+    public AudioClip died; // 사망 시 효과음
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,7 +49,9 @@ public class PlayerMoving : MonoBehaviour
         MagicScrollCanvas.SetActive(false);
         MagicScrollCanvas2.SetActive(false);
         MagicScrollT1.SetActive(false);
-}
+
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -100,6 +109,7 @@ public class PlayerMoving : MonoBehaviour
 
                     animator.SetBool("Jumping", true);  // 점프 모션
                     isJump = true;
+                    audioSource.PlayOneShot(jumpSound);
                 }
             }
 
@@ -118,6 +128,7 @@ public class PlayerMoving : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !MagicScrollCanvasFlag && Time.timeScale == 1f)
             { // 좌클릭이 눌렸고 Attack 애니메이션이 실행되고 있지 않고 마법서가 닫혀있고 시간이 정상적으로 흐르고 있으면 (시간만 세팅하고 마법서 검증은 빼도 될듯)
                 animator.SetTrigger("Attack");  // Attack 트리거를 설정하여 공격 모션
+                audioSource.PlayOneShot(AttackSound);
 
                 Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);  // 충돌 검사
                 foreach (Collider2D collider in collider2Ds)
@@ -143,6 +154,7 @@ public class PlayerMoving : MonoBehaviour
                             MagicScrollCanvasFlag = true;
                             MagicScrollCanvas.SetActive(true);  // 열고
                             Time.timeScale = 0f;
+                            audioSource.PlayOneShot(OScrollSound);
                         }
                         else  // 열려있으면
                         {
@@ -150,6 +162,7 @@ public class PlayerMoving : MonoBehaviour
                             MagicScrollCanvasFlag = false;
                             MagicScrollCanvas.SetActive(false);  // 닫음
                             Time.timeScale = 1f;
+                            audioSource.PlayOneShot(CScrollSound);
                         }
                     }
                 }
@@ -163,6 +176,7 @@ public class PlayerMoving : MonoBehaviour
                             MagicScrollCanvasFlag = true;
                             MagicScrollCanvas2.SetActive(true);  // 열고
                             Time.timeScale = 0f;
+                            audioSource.PlayOneShot(OScrollSound);
                         }
                         else  // 열려있으면
                         {
@@ -170,6 +184,7 @@ public class PlayerMoving : MonoBehaviour
                             MagicScrollCanvasFlag = false;
                             MagicScrollCanvas2.SetActive(false);  // 닫음
                             Time.timeScale = 1f;
+                            audioSource.PlayOneShot(CScrollSound);
                         }
                     }
                 }
@@ -183,6 +198,7 @@ public class PlayerMoving : MonoBehaviour
                             MagicScrollCanvasFlag = true;
                             MagicScrollT1.SetActive(true);  // 열고
                             Time.timeScale = 0f;
+                            audioSource.PlayOneShot(OScrollSound);
                         }
                         else  // 열려있으면
                         {
@@ -190,6 +206,7 @@ public class PlayerMoving : MonoBehaviour
                             MagicScrollCanvasFlag = false;
                             MagicScrollT1.SetActive(false);  // 닫음
                             Time.timeScale = 1f;
+                            audioSource.PlayOneShot(CScrollSound);
                         }
                     }
                 }
@@ -226,10 +243,11 @@ public class PlayerMoving : MonoBehaviour
 
     void Die()  // 사망 처리
     {
+        audioSource.PlayOneShot(died);
         var explo = Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(explo, 1);
         StartCoroutine(WaitFor());
-        transform.position = new Vector3(-315.7418f, -58.85741f, 599.7907f);  // 처음에 있던 위치로 (게임오버 개념. 게임오버 추가할 것)
+        transform.position = new Vector3(-623.0001f, -49.1f, 599.7907f);  // 처음에 있던 위치로 (게임오버 개념. 게임오버 추가할 것)
     }
     
     IEnumerator WaitFor()  // 3초 기다리기... 왜 작동 안 함??

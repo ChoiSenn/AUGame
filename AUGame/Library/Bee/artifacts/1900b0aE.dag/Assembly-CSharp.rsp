@@ -378,6 +378,7 @@
 "Assets/Scripts/EnemyScript/EnemyBullet.cs"
 "Assets/Scripts/EnemyScript/EnemySlimeAI.cs"
 "Assets/Scripts/EnemyScript/Movement2D.cs"
+"Assets/Scripts/ETCScript/BackgroundBGMHandler.cs"
 "Assets/Scripts/ETCScript/CameraFollow.cs"
 "Assets/Scripts/ETCScript/Theory1EKey.cs"
 "Assets/Scripts/InventoryScript/Inventory.cs"
