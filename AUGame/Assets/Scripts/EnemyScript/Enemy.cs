@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
             SetEnemyStatus("Slime", 100, 10, 1.5f, 50, 1.5f, 650f);
             nowHpbar = hpBar.transform.GetChild(0).GetComponent<Image>();
         }
-        else if (name.Equals("Bat"))  // 박쥐의 경우, 스텟 생성
+        else if (name.Equals("Bat") || name.Equals("smallBat"))  // 박쥐의 경우, 스텟 생성
         {
             SetEnemyStatus("Bat", 1, 10, 1.5f, 100, 1.5f, 400f);
 
@@ -114,7 +114,7 @@ public class Enemy : MonoBehaviour
                         {
                             Attacked();  // 공격 받는 모션
                         }
-                    } else if (name.Equals("Bat"))
+                    } else if (name.Equals("Bat") || name.Equals("smallBat"))
                     {
                         Die();
                     }
@@ -141,7 +141,7 @@ public class Enemy : MonoBehaviour
                     Attacked();  // 공격 받는 모션
                 }
             }
-            else if (name.Equals("Bat"))
+            else if (name.Equals("Bat") || name.Equals("smallBat"))
             {
                 Die();
             }

@@ -35,6 +35,9 @@ public class T1StageEvent : MonoBehaviour
     public AudioClip RightSound; 
     public AudioClip WrongSound;
 
+    public GameObject smallBat;
+    public Transform target;
+
     void Start()
     {
         MagicCircle.SetActive(false);
@@ -185,6 +188,7 @@ public class T1StageEvent : MonoBehaviour
         }
         else if (SelectAnswer != RightAnswer)
         {
+            userScore -= 5;
             Debug.Log("오답!");
             if (userLevel > 0)
             {
@@ -192,6 +196,19 @@ public class T1StageEvent : MonoBehaviour
             }
             audioSource.PlayOneShot(WrongSound);
             SetScore();
+            //enemySpawn();
+        }
+    }
+
+    void enemySpawn()  // 문제 틀렸을 시, 작은 박쥐 몬스터 스폰
+    {
+        if (target.position.x >= 0)   // 플레이어 위치의 x좌표가 양수이면 왼쪽에 생성, 음수이면 오른쪽에 생성
+        {
+            Instantiate(smallBat, new Vector3(-500, -30, 0), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(smallBat, new Vector3(500, -30, 0), Quaternion.identity);
         }
     }
 

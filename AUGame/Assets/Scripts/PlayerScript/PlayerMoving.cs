@@ -40,6 +40,13 @@ public class PlayerMoving : MonoBehaviour
     public AudioClip CScrollSound; // 마법서 닫는 효과음
     public AudioClip died; // 사망 시 효과음
 
+    public int playerLife;
+    public GameObject life1;  // 실제 UI에 표시될 라이프
+    public GameObject life2;
+    public GameObject life3;
+    public GameObject life4;
+    public GameObject life5;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -51,6 +58,8 @@ public class PlayerMoving : MonoBehaviour
         MagicScrollT1.SetActive(false);
 
         audioSource = GetComponent<AudioSource>();
+
+        playerLife = 5;
     }
 
     void Update()
@@ -243,11 +252,26 @@ public class PlayerMoving : MonoBehaviour
 
     void Die()  // 사망 처리
     {
+        playerLife -= 1;  // 라이프 감소 처리
+        switch (playerLife)
+        {
+            case 4: life1.SetActive(false); break;
+            case 3: life2.SetActive(false); break;
+            case 2: life3.SetActive(false); break;
+            case 1: life4.SetActive(false); break;
+            case 0: life5.SetActive(false); gameoverScene(); break;
+        }
+
         audioSource.PlayOneShot(died);
         var explo = Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(explo, 1);
         StartCoroutine(WaitFor());
-        transform.position = new Vector3(-623.0001f, -49.1f, 599.7907f);  // 처음에 있던 위치로 (게임오버 개념. 게임오버 추가할 것)
+        transform.position = new Vector3(-623.0001f, -49.1f, 599.7907f);  // 처음에 있던 위치로
+    }
+
+    void gameoverScene()
+    {
+        Application.LoadLevel("GameOver");
     }
     
     IEnumerator WaitFor()  // 3초 기다리기... 왜 작동 안 함??

@@ -402,6 +402,7 @@
 "Assets/Scripts/QuizScript/ChargingBar.cs"
 "Assets/Scripts/QuizScript/CSVReader.cs"
 "Assets/Scripts/QuizScript/T1StageEvent.cs"
+"Assets/Scripts/SceneScript/GameOverSystem.cs"
 "Assets/Scripts/SceneScript/StageClear.cs"
 "Assets/Scripts/SceneScript/StageMoving.cs"
 "Assets/Scripts/SceneScript/StageSystem.cs"

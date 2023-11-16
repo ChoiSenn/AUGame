@@ -264,8 +264,11 @@ public class BigBatAI : MonoBehaviour
     IEnumerator Bullet2Pattern()  // 탄막 발사 패턴 2
     {
         transform.localScale = new Vector3(-200, 200, 1);
+        rigid.velocity = new Vector2(1 * 100, 0 * 200);
+        yield return new WaitForSeconds(0.5f);
+
         rigid.velocity = new Vector2(1 * 0, 1 * 200);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         rigid.velocity = new Vector2(1 * 0, 1 * 0);
 
         float attackRate = 0.8f;  // 공격 주기
