@@ -6,6 +6,8 @@ public class PlayerMoving : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    public string Stage;
+
     [Header("AD 이동 속도")]
     [SerializeField][Range(0, 1000)] int speed = 150;
 
@@ -252,6 +254,7 @@ public class PlayerMoving : MonoBehaviour
 
     void Die()  // 사망 처리
     {
+        animator.SetTrigger("Damaged");
         playerLife -= 1;  // 라이프 감소 처리
         switch (playerLife)
         {
@@ -266,7 +269,14 @@ public class PlayerMoving : MonoBehaviour
         var explo = Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(explo, 1);
         StartCoroutine(WaitFor());
-        transform.position = new Vector3(-623.0001f, -49.1f, 599.7907f);  // 처음에 있던 위치로
+
+        if(Stage == "C1")
+        {
+            transform.position = new Vector3(-315.7418f, -58.85741f, 599.7907f);  // 처음에 있던 위치로
+        } else if(Stage == "T1")
+        {
+            transform.position = new Vector3(-623.0001f, -49.1f, 599.7907f);  // 처음에 있던 위치로
+        }
     }
 
     void gameoverScene()
