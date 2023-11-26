@@ -25,6 +25,9 @@ public class MagicScrollScript : MonoBehaviour
 
     public int failCount = 0;
 
+    public AudioSource audioSource; // AudioSource ÄÄÆ÷³ÍÆ®
+    public AudioClip puzzelRight;
+
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -149,6 +152,7 @@ public class MagicScrollScript : MonoBehaviour
 
     void BarDown(int bar_Y_Position)
     {
+        audioSource.PlayOneShot(puzzelRight);
         var explo = Instantiate(explosion, Bar.transform.position, Quaternion.identity);
         Destroy(explo, 0.5f);
 

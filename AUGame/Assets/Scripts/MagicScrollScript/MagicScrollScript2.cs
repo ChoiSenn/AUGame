@@ -26,6 +26,9 @@ public class MagicScrollScript2 : MonoBehaviour
 
     public int failCount = 0;
 
+    public AudioSource audioSource; // AudioSource ÄÄÆ÷³ÍÆ®
+    public AudioClip puzzelRight;
+
     void Start()
     {
         
@@ -109,6 +112,7 @@ public class MagicScrollScript2 : MonoBehaviour
 
     void BlockStairStart(int Count)
     {
+        audioSource.PlayOneShot(puzzelRight);
         if (Count >= 0)
         {
             int blockX = 1866;

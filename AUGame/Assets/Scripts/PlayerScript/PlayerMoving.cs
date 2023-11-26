@@ -41,6 +41,7 @@ public class PlayerMoving : MonoBehaviour
     public AudioClip OScrollSound; // 마법서 여는 효과음
     public AudioClip CScrollSound; // 마법서 닫는 효과음
     public AudioClip died; // 사망 시 효과음
+    public AudioClip gameOverSound; // 게임오버 시 효과음
 
     public int playerLife;
     public GameObject life1;  // 실제 UI에 표시될 라이프
@@ -48,6 +49,8 @@ public class PlayerMoving : MonoBehaviour
     public GameObject life3;
     public GameObject life4;
     public GameObject life5;
+
+    public ParticleSystem jumpDust; //점프 먼지 효과
 
     void Start()
     {
@@ -62,6 +65,8 @@ public class PlayerMoving : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         playerLife = 5;
+
+        jumpDust.Play(false);
     }
 
     void Update()
@@ -281,6 +286,7 @@ public class PlayerMoving : MonoBehaviour
 
     void gameoverScene()
     {
+        audioSource.PlayOneShot(gameOverSound);
         Application.LoadLevel("GameOver");
     }
     

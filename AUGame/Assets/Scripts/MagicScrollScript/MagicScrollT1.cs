@@ -24,6 +24,7 @@ public class MagicScrollT1 : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip doorOpen;
+    public AudioClip puzzelRight;
 
     void Start()
     {
@@ -85,6 +86,8 @@ public class MagicScrollT1 : MonoBehaviour
 
     void OpenDoor()
     {
+        audioSource.PlayOneShot(puzzelRight);
+
         Time.timeScale = 1f;  // 시간 흐르게 만들고
         MagicScrollCanvas.SetActive(false);  // 마법스크롤 창 닫고
         playerMoving.MagicScrollCanvasFlag = false;
