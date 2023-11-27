@@ -12634,6 +12634,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1550771492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550771472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2f81652c2a95e41b75e35cc0d6581a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpDust: {fileID: 502364720901570889, guid: 0517af32ccecc5d438053a55d46d08fa, type: 3}
+  walkDust: {fileID: 762276895535587148, guid: 3b1969582fb7eca4fb0995a856b309a1, type: 3}
+  isJump: 0
+  player: {fileID: 1299340262}
 --- !u!1 &1577920410
 GameObject:
   m_ObjectHideFlags: 0
@@ -16598,6 +16614,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2837604731678889617, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1550771482}
+    - targetCorrespondingSourceObject: {fileID: 2837604731678889617, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1550771492}
   m_SourcePrefab: {fileID: 100100000, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
 --- !u!1001 &1491461010860362974
 PrefabInstance:
