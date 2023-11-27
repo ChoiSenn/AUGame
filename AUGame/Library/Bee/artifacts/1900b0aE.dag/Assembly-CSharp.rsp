@@ -418,6 +418,7 @@
 "Assets/Scripts/SceneScript/StageClear.cs"
 "Assets/Scripts/SceneScript/StageMoving.cs"
 "Assets/Scripts/SceneScript/StageSystem.cs"
+"Assets/Scripts/SceneScript/StartSystem.cs"
 "Assets/Scripts/TextScript/TextTutorial1.cs"
 -langversion:9.0
 

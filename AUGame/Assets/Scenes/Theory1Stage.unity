@@ -7602,6 +7602,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1148993970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76303720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2f81652c2a95e41b75e35cc0d6581a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpDust: {fileID: 502364720901570889, guid: 0517af32ccecc5d438053a55d46d08fa, type: 3}
+  walkDust: {fileID: 762276895535587148, guid: 3b1969582fb7eca4fb0995a856b309a1, type: 3}
+  isJump: 0
+  player: {fileID: 1148993959}
 --- !u!1001 &1162699242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9221,6 +9237,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1550571667}
     - target: {fileID: 8454042948228102141, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
+      propertyPath: MagicEffect
+      value: 
+      objectReference: {fileID: 6968348861803499543, guid: 71facd300712cbd45bad9bceb692741b, type: 3}
+    - target: {fileID: 8454042948228102141, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1148993969}
@@ -9235,6 +9255,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2837604731678889617, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1148993969}
+    - targetCorrespondingSourceObject: {fileID: 2837604731678889617, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1148993970}
   m_SourcePrefab: {fileID: 100100000, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
 --- !u!1001 &1835626129
 PrefabInstance:

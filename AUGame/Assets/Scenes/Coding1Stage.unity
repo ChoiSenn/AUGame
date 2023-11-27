@@ -16604,6 +16604,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1345279372}
     - target: {fileID: 8454042948228102141, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
+      propertyPath: MagicEffect
+      value: 
+      objectReference: {fileID: 6968348861803499543, guid: 71facd300712cbd45bad9bceb692741b, type: 3}
+    - target: {fileID: 8454042948228102141, guid: b8ba366857757e44e8e08cf8235ccc1c, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1550771482}

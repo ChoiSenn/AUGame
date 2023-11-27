@@ -10,6 +10,8 @@ public class PlayerInventory : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip GetSound;
 
+    public ParticleSystem MagicEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,10 @@ public class PlayerInventory : MonoBehaviour
 
         if (clickInterface != null) // clickInterface가 인터페이스를 가지고 있을 시.
         {
+            ParticleSystem magicParticleSystem = Instantiate(MagicEffect);
+            magicParticleSystem.transform.position = hit.transform.position;
+            magicParticleSystem.Play();
+
             Item item = clickInterface.ClickItem(); // item에 클릭된 오브젝트의 아이템 정보를 넘김
             Debug.Log($"{item.itemName}");
             inventory.AddItem(item);
