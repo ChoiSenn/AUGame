@@ -1392,7 +1392,7 @@ TextMesh:
   m_FontSize: 200
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -1416,7 +1416,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6586,7 +6586,7 @@ TextMesh:
   m_FontSize: 200
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -6610,7 +6610,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8644,7 +8644,7 @@ TextMesh:
   m_FontSize: 200
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -8668,7 +8668,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8792,7 +8792,7 @@ TextMesh:
   m_FontSize: 200
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -8816,7 +8816,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9651,6 +9651,10 @@ PrefabInstance:
       value: "\uC704\uC758 \uD30C\uC774\uC36C \uCF54\uB4DC\uAC00 \uC2E4\uD589\uB418\uC5C8\uC744
         \uB54C\uC758\nOutput\uC744 \uC785\uB825\uD558\uC2DC\uC624."
       objectReference: {fileID: 0}
+    - target: {fileID: 483073882122334591, guid: df75d09a10cae0b4cb70631e3fabab1f, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
     - target: {fileID: 2924066012606562596, guid: df75d09a10cae0b4cb70631e3fabab1f, type: 3}
       propertyPath: m_Name
       value: CodingCanvas
@@ -9663,6 +9667,10 @@ PrefabInstance:
       propertyPath: BlindBtn
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5791543693750157127, guid: df75d09a10cae0b4cb70631e3fabab1f, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d35ee646d242e10428587cf2aa7236a8, type: 3}
     - target: {fileID: 6144590311015862075, guid: df75d09a10cae0b4cb70631e3fabab1f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
